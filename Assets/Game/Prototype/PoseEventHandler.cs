@@ -14,8 +14,7 @@ namespace Game.Prototype{
 		private bool _gunPose;
 		private bool _trigger;
 
-		[SerializeField] private Transform indexPosition;
-		
+		[SerializeField] private Transform indexPoint;
 		[SerializeField] private GameObject projectile;
 		
 		private void Start(){
@@ -42,9 +41,9 @@ namespace Game.Prototype{
 		}
 
 		private void Fire(){
-			var bullet = Instantiate(projectile, indexPosition.position, Quaternion.Euler(indexPosition.forward));
-			// bullet move forward with rigid body
-			bullet.GetComponent<Rigidbody>().AddForce(indexPosition.forward * 1000);
+			var forward = indexPoint.forward;
+			var bullet = Instantiate(projectile, indexPoint.position, Quaternion.Euler(forward));
+			bullet.GetComponent<Rigidbody>().AddForce(forward * 1000);
 		}
 	}
 }
