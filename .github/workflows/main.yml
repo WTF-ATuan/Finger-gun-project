@@ -14,24 +14,25 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - name: Checkout Code
-      - uses: actions/checkout@v2
-        
-      - uses: game-ci/unity-builder@v2
-        with:
-          targetPlatform: Android # Build an Android .apk standalone app.
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Restore Library cache
         uses: actions/cache@v2
         with:
-            path: Library
-            key: Library-build-Android
-            restore-keys: |
-              Library-build-
-              Library-
-            
+          path: Library
+          key: Library-build-Android
+          restore-keys: |
+            Library-build-
+            Library-
+  
+      - uses: game-ci/unity-builder@v2
+        with:
+          targetPlatform: Android
+
       - uses: actions/upload-artifact@v2
         with:
           name: build-Android
           path: build/Android
+  
           
