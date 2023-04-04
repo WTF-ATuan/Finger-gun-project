@@ -2,35 +2,36 @@ name: Build project
 
 on: [ push ]
 
+env: 
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+  UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
 jobs:
-  buildForAllSupportedPlatforms:
-    name: Build for ${{ matrix.targetPlatform }}
+  buildAndroid:
+    name: Build for Android 📱
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
     steps:
+      - name: Checkout Code
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          lfs: true
-      #      - uses: actions/cache@v2
-      #        with:
-      #          path: C:\Unity Project\Finger gun project\Library 
-      #          key: Library-Finger-gun-project-Android
-      #          restore-keys: |
-      #            Library-Finger-gun-project-
-      #            Library-
+        
       - uses: game-ci/unity-builder@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: Android # Build an Android .apk standalone app.
+
+      - name: Restore Library cache
+        uses: actions/cache@v2
+        with:
+            path: Library
+            key: Library-build-Android
+            restore-keys: |
+              Library-build-
+              Library-
+            
       - uses: actions/upload-artifact@v2
         with:
-          name: Build
-          path: build
-      - uses: game-ci/unity-builder@v2
-        with:
-          customImage: 'unityci/editor:2020.1.14f1-base-0'
+          name: build-Android
+          path: build/Android
+          
