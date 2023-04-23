@@ -4111,7 +4111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fingerGunPoseWrapper: {fileID: 615438301}
   triggerPoseWrapper: {fileID: 933344717}
-  indexPosition: {fileID: 882046002}
+  indexPoint: {fileID: 882046002}
   projectile: {fileID: 1086664671600574, guid: 5953171a59c27394e9ad5cbb564affa8, type: 3}
 --- !u!33 &8345560314991124498
 MeshFilter:
