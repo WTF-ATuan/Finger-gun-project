@@ -1,0 +1,14 @@
+{
+  "GlobalObjectId_V1-2-dc43c1107cb04e844b753c0709aaca51-189091626145577203-1640084120": {
+    "GameObjectId": "GlobalObjectId_V1-2-dc43c1107cb04e844b753c0709aaca51-189091626145577203-1640084120",
+    "CommentText": "TODO\n 1.Binding Trigger to open fire\n 2.Testing using Grab to reload \n 3.When Fire added some recoil\n  ",
+    "AssetGUID": "dc43c1107cb04e844b753c0709aaca51",
+    "UniqueItemID": "GlobalObjectId_V1-2-dc43c1107cb04e844b753c0709aaca51-189091626145577203-1640084120"
+  },
+  "GlobalObjectId_V1-2-dc43c1107cb04e844b753c0709aaca51-5679112963091543804-42577807": {
+    "GameObjectId": "GlobalObjectId_V1-2-dc43c1107cb04e844b753c0709aaca51-5679112963091543804-42577807",
+    "CommentText": "we don,t need grab on right hand \n",
+    "AssetGUID": "dc43c1107cb04e844b753c0709aaca51",
+    "UniqueItemID": "GlobalObjectId_V1-2-dc43c1107cb04e844b753c0709aaca51-5679112963091543804-42577807"
+  }
+}
