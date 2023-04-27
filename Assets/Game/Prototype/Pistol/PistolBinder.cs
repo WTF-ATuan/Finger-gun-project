@@ -10,9 +10,14 @@ namespace Game.Prototype.Pistol{
 		}
 
 		private void Update(){
-			var openingFire = OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger, OVRInput.Controller.RHand);
+			var openingFire = OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger);
 			if(openingFire){
 				_bindingWeapon.Fire();
+			}
+
+			var reloading = OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger);
+			if(reloading){
+				_bindingWeapon.Reload();
 			}
 		}
 	}
