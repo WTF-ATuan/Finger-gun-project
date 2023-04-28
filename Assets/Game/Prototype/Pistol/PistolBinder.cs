@@ -47,6 +47,21 @@ namespace Game.Prototype.Pistol{
 		private void SimpleHaptic(){
 			OVRInput.SetControllerVibration(Frequency, Amplitude, OVRInput.Controller.RTouch);
 		}
-		
+
+		private void LocationHaptic(){
+			OVRInput.SetControllerLocalizedVibration(OVRInput.HapticsLocation.Index, Frequency, Amplitude,
+				OVRInput.Controller.RTouch);
+		}
+		private void AmplitudeEnvelopeHaptic(){
+			var envelopeVibration = new OVRInput.HapticsAmplitudeEnvelopeVibration{
+				Duration = Duration
+			};
+			OVRInput.SetControllerHapticsAmplitudeEnvelope(envelopeVibration);
+		}
+
+		private void HapticPCM(){
+			var hapticsPcmVibration = new OVRPlugin.HapticsPcmVibration();
+			OVRPlugin.SetControllerHapticsPcm(OVRPlugin.Controller.RTouch, hapticsPcmVibration);
+		}
 	}
 }
