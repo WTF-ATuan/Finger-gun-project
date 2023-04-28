@@ -20,7 +20,7 @@ namespace Game.Prototype.Pistol{
 			var openingFire = OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger);
 			if(openingFire){
 				_bindingWeapon.Fire();
-				SimpleHaptic();
+				ClipHaptic();
 			}
 
 			var reloading = OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger);
@@ -29,8 +29,9 @@ namespace Game.Prototype.Pistol{
 			}
 		}
 
-		private void SimpleHaptic(){
+		private void ClipHaptic(){
 			var hapticsClip = new OVRHapticsClip();
+
 			// 設置震動數據
 			var cnt = (int)(Duration * OVRHaptics.Config.SampleRateHz);
 			for(var i = 0; i < cnt; i++){
@@ -41,6 +42,10 @@ namespace Game.Prototype.Pistol{
 
 			var rightChannel = OVRHaptics.RightChannel;
 			rightChannel.Preempt(hapticsClip);
+		}
+
+		private void SimpleHaptic(){
+			OVRInput.SetControllerVibration(Frequency, Amplitude, OVRInput.Controller.RTouch);
 		}
 		
 	}
