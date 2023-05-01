@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using InfimaGames.LowPolyShooterPack;
-using UnityEditor.SceneManagement;
+﻿using InfimaGames.LowPolyShooterPack;
 using UnityEngine;
 
 namespace Game.Prototype.Pistol{
@@ -8,6 +6,8 @@ namespace Game.Prototype.Pistol{
 		private Weapon _bindingWeapon;
 		private PistolRecoil _recoil;
 		private AudioSource _audioPlayer;
+		[SerializeField] private AudioClip fireClip;
+
 
 		// 設置震動參數
 		[SerializeField] private AudioClip vibrationClip;
@@ -26,9 +26,8 @@ namespace Game.Prototype.Pistol{
 			if(openingFire){
 				_bindingWeapon.Fire();
 				_recoil.Recoil();
-				_audioPlayer.PlayOneShot(vibrationClip);
-				// ClipHaptic();
-				SimpleHaptic();
+				_audioPlayer.PlayOneShot(fireClip);
+				ClipHaptic();
 			}
 
 			var reloading = OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger);
@@ -38,7 +37,7 @@ namespace Game.Prototype.Pistol{
 		}
 
 		private void ClipHaptic(){
-			var hapticsClip = new OVRHapticsClip(vibrationClip);
+			var hapticsClip = new OVRHapticsClip(vibrationClip, 10);
 			var rightChannel = OVRHaptics.RightChannel;
 			rightChannel.Preempt(hapticsClip);
 		}
