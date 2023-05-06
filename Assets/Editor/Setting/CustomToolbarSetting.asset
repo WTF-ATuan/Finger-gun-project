@@ -13,106 +13,106 @@ MonoBehaviour:
   m_Name: CustomToolbarSetting
   m_EditorClassIdentifier: 
   elements:
-  - rid: 1442247569028939780
-  - rid: 1442247569028939781
-  - rid: 1442247569028939782
-  - rid: 1442247569028939783
-  - rid: 1442247569028939784
-  - rid: 1442247569028939785
-  - rid: 1442247569028939786
-  - rid: 1442247569028939787
-  - rid: 1442247569028939788
-  - rid: 1442247569028939789
-  - rid: 1442247569028939790
-  - rid: 1442247569028939791
-  - rid: 1442247569028939792
-  - rid: 1442247569028939793
-  - rid: 1442247569028939794
-  - rid: 1442247569028939795
+  - rid: 866874832339599360
+  - rid: 866874832339599361
+  - rid: 866874832339599362
+  - rid: 866874832339599363
+  - rid: 866874832339599364
+  - rid: 866874832339599365
+  - rid: 866874832339599366
+  - rid: 866874832339599367
+  - rid: 866874832339599368
+  - rid: 866874832339599369
+  - rid: 866874832339599370
+  - rid: 866874832339599371
+  - rid: 866874832339599372
+  - rid: 866874832339599373
+  - rid: 866874832339599374
+  - rid: 866874832339599375
   references:
     version: 2
     RefIds:
-    - rid: 1442247569028939780
+    - rid: 866874832339599360
       type: {class: ToolbarEnterPlayMode, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 100
-    - rid: 1442247569028939781
+    - rid: 866874832339599361
       type: {class: ToolbarSceneSelection, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 100
         showSceneFolder: 1
-    - rid: 1442247569028939782
+    - rid: 866874832339599362
       type: {class: ToolbarSpace, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 10
-    - rid: 1442247569028939783
+    - rid: 866874832339599363
       type: {class: ToolbarSavingPrefs, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 100
-    - rid: 1442247569028939784
+    - rid: 866874832339599364
       type: {class: ToolbarClearPrefs, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 100
-    - rid: 1442247569028939785
+    - rid: 866874832339599365
       type: {class: ToolbarSpace, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 10
-    - rid: 1442247569028939786
+    - rid: 866874832339599366
       type: {class: ToolbarReloadScene, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 100
-    - rid: 1442247569028939787
+    - rid: 866874832339599367
       type: {class: ToolbarStartFromFirstScene, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 100
-    - rid: 1442247569028939788
+    - rid: 866874832339599368
       type: {class: ToolbarSpace, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 10
-    - rid: 1442247569028939789
+    - rid: 866874832339599369
       type: {class: ToolbarSides, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 100
-    - rid: 1442247569028939790
+    - rid: 866874832339599370
       type: {class: ToolbarTimeslider, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 200
         minTime: 0
         maxTime: 10
-    - rid: 1442247569028939791
+    - rid: 866874832339599371
       type: {class: ToolbarFPSSlider, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 200
         minFPS: 1
         maxFPS: 120
-    - rid: 1442247569028939792
+    - rid: 866874832339599372
       type: {class: ToolbarSpace, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 10
-    - rid: 1442247569028939793
+    - rid: 866874832339599373
       type: {class: ToolbarRecompile, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 100
-    - rid: 1442247569028939794
+    - rid: 866874832339599374
       type: {class: ToolbarReserializeSelected, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
         WidthInToolbar: 100
-    - rid: 1442247569028939795
+    - rid: 866874832339599375
       type: {class: ToolbarReserializeAll, ns: , asm: CustomToolbar.Editor}
       data:
         IsEnabled: 1
