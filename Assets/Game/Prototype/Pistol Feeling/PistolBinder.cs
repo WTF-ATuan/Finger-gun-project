@@ -27,7 +27,7 @@ namespace Game.Prototype.Pistol{
 				_bindingWeapon.Fire();
 				_recoil.Recoil();
 				_audioPlayer.PlayOneShot(fireClip);
-				ClipHaptic();
+				SimpleHaptic();
 			}
 
 			var reloading = OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger);
@@ -44,6 +44,10 @@ namespace Game.Prototype.Pistol{
 
 		private void SimpleHaptic(){
 			OVRInput.SetControllerVibration(Frequency, Amplitude, OVRInput.Controller.RTouch);
+			Invoke(nameof(StopHaptic) , 0.3f);
+		}
+		private void StopHaptic(){
+			OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
 		}
 
 		private void LocationHaptic(){

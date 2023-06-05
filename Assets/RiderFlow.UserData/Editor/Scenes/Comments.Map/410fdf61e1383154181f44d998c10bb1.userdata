@@ -4,5 +4,11 @@
     "CommentText": "Boss Temp\n",
     "AssetGUID": "410fdf61e1383154181f44d998c10bb1",
     "UniqueItemID": "GlobalObjectId_V1-2-410fdf61e1383154181f44d998c10bb1-140506-1782921080"
+  },
+  "GlobalObjectId_V1-2-410fdf61e1383154181f44d998c10bb1-1783042978-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-410fdf61e1383154181f44d998c10bb1-1783042978-0",
+    "CommentText": "Boss Who fight to player\n",
+    "AssetGUID": "410fdf61e1383154181f44d998c10bb1",
+    "UniqueItemID": "GlobalObjectId_V1-2-410fdf61e1383154181f44d998c10bb1-1783042978-0"
   }
 }

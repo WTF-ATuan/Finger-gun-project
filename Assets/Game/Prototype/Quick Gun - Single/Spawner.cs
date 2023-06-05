@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace HelloPico2.InteractableObjects{
 	public class Spawner : MonoBehaviour, ISpawner{
-		public GameObject spawnPrefab;
+		[Required] public GameObject spawnPrefab;
 
 
 		[TitleGroup("RotateSetting")]
@@ -112,16 +112,16 @@ namespace HelloPico2.InteractableObjects{
 					Gizmos.DrawWireCube(Vector3.zero, Vector3.one * 0.5f);
 				}
 				else{
-					var sharedMesh = spawnPrefab.GetComponent<MeshFilter>().sharedMesh;
-					if(sharedMesh){
-						Gizmos.DrawWireMesh(sharedMesh, Vector3.zero, Quaternion.identity, Vector3.one * 0.5f);
+					var meshFilter = spawnPrefab.GetComponent<MeshFilter>();
+					if(meshFilter){
+						Gizmos.DrawWireMesh(meshFilter.sharedMesh, Vector3.zero, Quaternion.identity,
+							Vector3.one * 0.5f);
 					}
 					else{
-						Gizmos.DrawWireCube(Vector3.zero, Vector3.one * 0.5f);
+						Gizmos.DrawWireCube(Vector3.zero, spawnPrefab.transform.localScale);
 					}
 				}
 			}
 		}
-		
 	}
 }
