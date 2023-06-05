@@ -13,6 +13,9 @@ scopes = {
 	"last_search.16777408" = ""
 	"OpenInspectorPreview.16777408" = "0"
 	"currentGroup.16777408" = "scene"
+	"last_search.2138236A" = "Quick"
+	"OpenInspectorPreview.2138236A" = "0"
+	"currentGroup.2138236A" = "all"
 }
 providers = {
 	adb = {
