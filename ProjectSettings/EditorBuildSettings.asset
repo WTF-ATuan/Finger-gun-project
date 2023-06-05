@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Game/Prototype/Fusion_Shared/Fusion_Testing.unity
+    guid: e3dac4e2776f6b34f8316bf20ea8e894
+  - enabled: 1
     path: Assets/Game/Prototype/Pistol/Pistol Demo.unity
     guid: dc43c1107cb04e844b753c0709aaca51
   m_configObjects:
