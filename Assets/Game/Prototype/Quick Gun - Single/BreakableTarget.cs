@@ -11,8 +11,12 @@ namespace Game.Prototype.Quick_Gun___Single{
 			if(!collision.gameObject.TryGetComponent(out Projectile projectile)) return;
 			_hitCount++;
 			if(_hitCount >= destroyCount){
+				EventAggregator.Publish(new TargetHitEvent());
 				transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => Destroy(gameObject));
 			}
 		}
+	}
+	public class TargetHitEvent : EventArgs{
+		public int HitCount;
 	}
 }

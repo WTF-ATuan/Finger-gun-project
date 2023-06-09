@@ -13,6 +13,7 @@ namespace HelloPico2.InteractableObjects{
         [SerializeField] private float delayOpenTime = 1f;
 
         private CancellationToken _token;
+        
 
         private void OnEnable(){
             StartLoop();
