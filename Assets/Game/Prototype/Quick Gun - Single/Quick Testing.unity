@@ -1880,8 +1880,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetType: 2
   targetTransform: {fileID: 421319210}
-  targetVector: {x: 0, y: 0.5, z: -17.5}
-  targetBoxSize: {x: 2.5, y: 1, z: 0.5}
+  targetVector: {x: 0, y: 0.2, z: -17.5}
+  targetBoxSize: {x: 1.5, y: 1.5, z: 0.5}
   rotateType: 0
   during: 3
   movingCurve:

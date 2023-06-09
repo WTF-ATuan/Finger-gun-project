@@ -12,7 +12,6 @@ namespace Game.Prototype.Pistol{
 		// 設置震動參數
 		[SerializeField] private AudioClip vibrationClip;
 		private const float Amplitude = 1.0f;
-		private const float Duration = 0.3f;
 		private const float Frequency = 300.0f;
 
 		private void Start(){
@@ -44,27 +43,11 @@ namespace Game.Prototype.Pistol{
 
 		private void SimpleHaptic(){
 			OVRInput.SetControllerVibration(Frequency, Amplitude, OVRInput.Controller.RTouch);
-			Invoke(nameof(StopHaptic) , 0.3f);
+			Invoke(nameof(StopHaptic) , 0.15f);
 		}
 		private void StopHaptic(){
 			OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
 		}
-
-		private void LocationHaptic(){
-			OVRInput.SetControllerLocalizedVibration(OVRInput.HapticsLocation.Index, Frequency, Amplitude,
-				OVRInput.Controller.RTouch);
-		}
-
-		private void AmplitudeEnvelopeHaptic(){
-			var envelopeVibration = new OVRInput.HapticsAmplitudeEnvelopeVibration{
-				Duration = Duration
-			};
-			OVRInput.SetControllerHapticsAmplitudeEnvelope(envelopeVibration);
-		}
-
-		private void HapticPCM(){
-			var hapticsPcmVibration = new OVRPlugin.HapticsPcmVibration();
-			OVRPlugin.SetControllerHapticsPcm(OVRPlugin.Controller.RTouch, hapticsPcmVibration);
-		}
+		
 	}
 }
