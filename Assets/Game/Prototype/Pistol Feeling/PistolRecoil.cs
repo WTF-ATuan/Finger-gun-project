@@ -26,8 +26,7 @@ namespace Game.Prototype.Pistol{
 		}
 
 		public void Recoil(){
-			_targetRotationEuler += new Vector3(recoilRotate.x, Random.Range(-recoilRotate.y, recoilRotate.y),
-				Random.Range(-recoilRotate.z, recoilRotate.z));
+			_targetRotationEuler += new Vector3(recoilRotate.x, recoilRotate.y, recoilRotate.z);
 		}
 	}
 }
