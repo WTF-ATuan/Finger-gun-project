@@ -20,6 +20,7 @@ Material:
     RenderType: Transparent
   disabledShaderPasses:
   - DepthOnly
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -45,22 +46,27 @@ Material:
     - _BUILTIN_QueueControl: -1
     - _BUILTIN_QueueOffset: 0
     - _Blend: 0
-    - _CastShadows: 1
+    - _CastShadows: 0
+    - _CellPower: 2.47
     - _Cull: 2
     - _DstBlend: 10
     - _Float: 0
     - _Fullscreenintensity: 0.5
+    - _NoiseSpeed: 0.098
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
+    - _Strength: 0.0587
     - _Surface: 1
+    - _VignetteRadiusPower: 2
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     - _true_hurt_and_false_defense: 0
-    - _vignettelntensity: 0.83
+    - _vignettelntensity: 0.742
     m_Colors:
-    - _FullscreenColor: {r: 2.670157, g: 0, b: 0, a: 0}
+    - _FullscreenColor: {r: 1, g: 0.08466049, b: 0, a: 0}
+    - _RippleCenter: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7476599264862005011
 MonoBehaviour:
