@@ -52,7 +52,9 @@ Material:
     - _DstBlend: 10
     - _Float: 0
     - _Fullscreenintensity: 0.5
+    - _NoiseScale: 80
     - _NoiseSpeed: 0.098
+    - _NoiseStrength: 0.0133
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
@@ -63,7 +65,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     - _true_hurt_and_false_defense: 0
-    - _vignettelntensity: 0.742
+    - _vignettelntensity: 0.803
     m_Colors:
     - _FullscreenColor: {r: 1, g: 0.08466049, b: 0, a: 0}
     - _RippleCenter: {r: 0, g: 0, b: 0, a: 0}
