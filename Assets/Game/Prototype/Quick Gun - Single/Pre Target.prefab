@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7541894559064151499}
   - component: {fileID: 7541894559064151498}
   - component: {fileID: 7541894559064151497}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pre Target
   m_TagString: Metal
   m_Icon: {fileID: 0}
