@@ -12,6 +12,9 @@ namespace HelloPico2.InteractableObjects{
 
 		[ShowIf("IsTransformType")] [TitleGroup("Target Setting")]
 		public Transform targetTransform;
+		
+		[ShowIf("IsTransformType")] [TitleGroup("Target Setting")]
+		public Vector3 targetOffset;
 
 		[ShowIf("IsVectorType")] [TitleGroup("Target Setting")]
 		public Vector3 targetVector;
@@ -106,7 +109,7 @@ namespace HelloPico2.InteractableObjects{
 					var cameraPosition = main ? main.transform.position : current.transform.position;
 					return cameraPosition;
 				case TargetType.Transform:
-					var position = targetTransform.position;
+					var position = targetTransform.position + targetOffset;
 					return position;
 				case TargetType.Vector:
 					var targetPosition = transform.position + targetVector;
