@@ -1,0 +1,37 @@
+{
+  "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-238445886-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-238445886-0",
+    "AssetGUID": "6a7c8b7acc6f2f047b83346795b5782e",
+    "UniqueItemID": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-238445886-0"
+  },
+  "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-1052373071-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-1052373071-0",
+    "AssetGUID": "6a7c8b7acc6f2f047b83346795b5782e",
+    "UniqueItemID": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-1052373071-0"
+  },
+  "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-705346841-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-705346841-0",
+    "AssetGUID": "6a7c8b7acc6f2f047b83346795b5782e",
+    "UniqueItemID": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-705346841-0"
+  },
+  "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-1525499615-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-1525499615-0",
+    "AssetGUID": "6a7c8b7acc6f2f047b83346795b5782e",
+    "UniqueItemID": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-1525499615-0"
+  },
+  "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-93553848-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-93553848-0",
+    "AssetGUID": "6a7c8b7acc6f2f047b83346795b5782e",
+    "UniqueItemID": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-93553848-0"
+  },
+  "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-1385278328-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-1385278328-0",
+    "AssetGUID": "6a7c8b7acc6f2f047b83346795b5782e",
+    "UniqueItemID": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-1385278328-0"
+  },
+  "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-338201716-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-338201716-0",
+    "AssetGUID": "6a7c8b7acc6f2f047b83346795b5782e",
+    "UniqueItemID": "GlobalObjectId_V1-2-6a7c8b7acc6f2f047b83346795b5782e-338201716-0"
+  }
+}

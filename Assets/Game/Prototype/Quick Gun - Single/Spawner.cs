@@ -48,7 +48,6 @@ namespace HelloPico2.InteractableObjects{
 
 		private void OnDisable(){
 			cloneList.RemoveAll(x => x == null);
-			cloneList.Clear();
 		}
 
 		private void FixedUpdate(){

@@ -1,5 +1,4 @@
-﻿using System;
-using Sirenix.Utilities;
+﻿using InfimaGames.LowPolyShooterPack;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
