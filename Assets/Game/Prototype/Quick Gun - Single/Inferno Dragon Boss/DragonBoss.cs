@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Game.Project;
 using HelloPico2.InteractableObjects;
 using Sirenix.OdinInspector;
@@ -13,6 +14,7 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 		[SerializeField] private Spawner fireBallSpawner;
 		[SerializeField] private Spawner enemySpawner;
 		[SerializeField] private Spawner specialFireballSpawner;
+		[SerializeField] private Spawner throwEnemySpawner;
 
 
 		//HitBox
@@ -24,6 +26,7 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 		//Animation
 		[SerializeField] private AnimationClip fireBallClip;
 		[SerializeField] private AnimationClip specialFireBallClip;
+		[SerializeField] private AnimationClip throwEnemyClip;
 		private Animator _animator;
 
 		private int _hitCount;
@@ -32,6 +35,7 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 
 		[BoxGroup("Health")] public Image hpBar;
 		[BoxGroup("Health")] public float hp = 100;
+
 
 		private void Start(){
 			_fireballBehaviorTimer = new ColdDownTimer(6.5f);
@@ -51,6 +55,7 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 				_animator.SetBool("Dead", true);
 				_animator.enabled = false;
 			}
+
 			var right = hpBar.rectTransform.offsetMax;
 			right = new Vector3(Mathf.Lerp(-5, 0, hp / 100), right.y);
 			hpBar.rectTransform.offsetMax = right;
@@ -77,7 +82,7 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 				return;
 			}
 
-			if(enemySpawner.spawnCount >= 10){
+			if(enemySpawner.CloneList.Count >= 10){
 				ThrowEnemyBehavior();
 				return;
 			}
@@ -100,8 +105,15 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 		}
 
 		private void ThrowEnemyBehavior(){
-			Debug.Log($"ThrowEnemyBehavior");
-			enemySpawner.enabled = false;
+			for(var i = 0; i < 5; i++){
+				Destroy(enemySpawner.CloneList[i]);
+				enemySpawner.CloneList.RemoveAt(i);
+			}
+
+			throwEnemySpawner.enabled = false;
+			throwEnemySpawner.enabled = true;
+			_animator.Play(throwEnemyClip.name);
+			_fireballBehaviorTimer.Reset();
 		}
 
 		private void SpecialFireballBehavior(){
