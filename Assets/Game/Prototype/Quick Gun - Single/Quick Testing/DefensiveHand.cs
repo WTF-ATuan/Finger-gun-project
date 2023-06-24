@@ -37,9 +37,9 @@ namespace Game.Prototype.Quick_Gun___Single.Art_object{
 				obj.transform.position = shield.transform.position;
 				var rigidbody = obj.GetComponent<Rigidbody>();
 				rigidbody.velocity = Vector3.zero;
-				rigidbody.AddForce(emitter.transform.forward * 20, ForceMode.Impulse);
-				OVRInput.SetControllerVibration(0.2f, 0.1f, OVRInput.Controller.LTouch);
-				Invoke(nameof(StopHaptic) , 0.05f);
+				rigidbody.AddForce(emitter.transform.forward * 30, ForceMode.Impulse);
+				OVRInput.SetControllerVibration(0.2f, 0.3f, OVRInput.Controller.LTouch);
+				Invoke(nameof(StopHaptic) , 0.1f);
 			}
 		}
 
