@@ -31,12 +31,15 @@ namespace Game.Prototype.Quick_Gun___Single.Art_object{
 		}
 
 		private void OnShieldHitStay(Collider obj){
-			if(!obj.gameObject.TryGetComponent(out Projectile projectile)) return;
+			if(!obj.gameObject.TryGetComponent(out Projectile _)) return;
 			if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)){
 				DOTween.Kill(obj.transform);
 				obj.transform.position = shield.transform.position;
-				obj.GetComponent<Rigidbody>().velocity = Vector3.zero;
-				obj.GetComponent<Rigidbody>().useGravity = false;
+				var rigidbody = obj.GetComponent<Rigidbody>();
+				rigidbody.velocity = Vector3.zero;
+				rigidbody.AddForce(emitter.transform.forward * 20, ForceMode.Impulse);
+				OVRInput.SetControllerVibration(0.2f, 0.1f, OVRInput.Controller.LTouch);
+				Invoke(nameof(StopHaptic) , 0.05f);
 			}
 		}
 
@@ -57,6 +60,9 @@ namespace Game.Prototype.Quick_Gun___Single.Art_object{
 			var attachPoint = other.ClosestPoint(shield.transform.position);
 			var vfxClone = Instantiate(hitVFX, attachPoint, Quaternion.identity);
 			Destroy(vfxClone, 1.5f);
+		}
+		private void StopHaptic(){
+			OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
 		}
 	}
 }
