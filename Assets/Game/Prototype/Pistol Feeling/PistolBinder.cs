@@ -7,6 +7,7 @@ namespace Game.Prototype.Pistol{
 		private PistolRecoil _recoil;
 		private AudioSource _audioPlayer;
 		[SerializeField] private AudioClip fireClip;
+		[SerializeField] private bool isRight = true;
 
 
 		// 設置震動參數
@@ -21,7 +22,10 @@ namespace Game.Prototype.Pistol{
 		}
 
 		private void Update(){
-			var openingFire = OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger);
+			var openingFire =
+					OVRInput.GetDown(isRight
+							? OVRInput.Button.SecondaryIndexTrigger
+							: OVRInput.Button.PrimaryIndexTrigger);
 			if(openingFire){
 				_bindingWeapon.Fire();
 				_recoil.Recoil();
@@ -43,11 +47,11 @@ namespace Game.Prototype.Pistol{
 
 		private void SimpleHaptic(){
 			OVRInput.SetControllerVibration(Frequency, Amplitude, OVRInput.Controller.RTouch);
-			Invoke(nameof(StopHaptic) , 0.15f);
+			Invoke(nameof(StopHaptic), 0.15f);
 		}
+
 		private void StopHaptic(){
 			OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
 		}
-		
 	}
 }
