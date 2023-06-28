@@ -46,12 +46,19 @@ namespace Game.Prototype.Pistol{
 		}
 
 		private void SimpleHaptic(){
-			OVRInput.SetControllerVibration(Frequency, Amplitude, OVRInput.Controller.RTouch);
-			Invoke(nameof(StopHaptic), 0.15f);
+			if(isRight){
+				OVRInput.SetControllerVibration(Frequency, Amplitude, OVRInput.Controller.RTouch);
+				Invoke(nameof(StopHaptic), 0.15f);
+			}
+			else{
+				OVRInput.SetControllerVibration(Frequency, Amplitude, OVRInput.Controller.LTouch);
+				Invoke(nameof(StopHaptic), 0.15f);
+			}
 		}
 
 		private void StopHaptic(){
 			OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+			OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
 		}
 	}
 }
