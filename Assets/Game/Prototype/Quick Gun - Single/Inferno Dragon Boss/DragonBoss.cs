@@ -4,42 +4,63 @@ using Sirenix.OdinInspector;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 	public class DragonBoss : MonoBehaviour{
-		[SerializeField] private Spawner fireBallSpawner;
+		[BoxGroup("Core")] [SerializeField] private Collider coreHitBox;
+		[BoxGroup("Core")] [SerializeField] private AudioClip coreHitSound;
+		[BoxGroup("Core")] [SerializeField] private GameObject coreHitParticle;
+
+		[BoxGroup("Blocker")] [SerializeField] private Spawner blockSpawner;
+
+		[BoxGroup("Blocker")] [SerializeField] private AnimationClip throwClip;
 
 
-		//HitBox
-		[BoxGroup("HitBox")] [SerializeField] private Collider bodyHitBox;
-		[BoxGroup("HitBox")] [SerializeField] private Collider headHitBox;
+		[BoxGroup("FireBall")] [SerializeField]
+		private Spawner fireBallSpawner;
 
+		[BoxGroup("FireBall")] [SerializeField]
+		private AnimationClip fireBallClip;
 
-		//Animation
-		[SerializeField] private AnimationClip fireBallClip;
-		[SerializeField] private float fireBallColdDown = 10;
-		private Animator _animator;
-
-		private ColdDownTimer _fireballBehaviorTimer;
+		[BoxGroup("FireBall")] [SerializeField]
+		private float fireBallColdDown = 10;
 
 		[BoxGroup("Health")] public Image hpBar;
 		[BoxGroup("Health")] public float hp = 100;
 
+		[SerializeField] private UnityEvent stageTwoEvent;
+
+
+		private Animator _animator;
+		private AudioSource _audioSource;
+		private ColdDownTimer _fireballBehaviorTimer;
+		private bool _stageTwo;
+		private int _attackCount;
 
 		private void Start(){
 			_animator = GetComponentInChildren<Animator>();
-			bodyHitBox.OnCollisionEnterAsObservable().Subscribe(x => Hit(x, 0.1f));
-			headHitBox.OnCollisionEnterAsObservable().Subscribe(x => Hit(x, 0.5f));
+			_audioSource = GetComponent<AudioSource>();
+			coreHitBox.OnCollisionEnterAsObservable().Subscribe(x => {
+				if(!x.gameObject.TryGetComponent(out Projectile projectile)) return;
+				CoreHit();
+			});
 			_fireballBehaviorTimer = new ColdDownTimer(fireBallColdDown);
 		}
 
-		private void Hit(Collision obj, float damage){
-			if(!obj.gameObject.TryGetComponent(out Projectile projectile)) return;
+		private void Hit(float damage){
 			hp -= damage;
+			if(hp < 60){
+				_animator.SetBool($"Fly", true);
+				stageTwoEvent?.Invoke();
+				_stageTwo = true;
+			}
+
 			if(hp < 0){
 				fireBallSpawner.gameObject.SetActive(false);
-				_animator.SetBool("Dead", true);
+				_animator.SetBool($"Dead", true);
 				_animator.enabled = false;
 			}
 
@@ -48,9 +69,23 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 			hpBar.rectTransform.offsetMax = right;
 		}
 
+		private void CoreHit(){
+			_audioSource.PlayOneShot(coreHitSound);
+			var vfxClone = Instantiate(coreHitParticle, coreHitBox.transform.position, Quaternion.identity);
+			Destroy(vfxClone, 1.5f);
+			Hit(15);
+		}
+
 
 		private void Update(){
-			FireballBehavior();
+			if(!_stageTwo){
+				if(_attackCount < 3){
+					FireballBehavior();
+				}
+				else{
+					ThrowObject();
+				}
+			}
 		}
 
 		private void FireballBehavior(){
@@ -59,6 +94,17 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 			// ReSharper disable once Unity.InefficientPropertyAccess
 			fireBallSpawner.enabled = true;
 			_animator.Play(fireBallClip.name);
+			_fireballBehaviorTimer.Reset();
+			_attackCount++;
+		}
+
+		private void ThrowObject(){
+			if(!_fireballBehaviorTimer.CanInvoke()) return;
+			blockSpawner.enabled = false;
+			// ReSharper disable once Unity.InefficientPropertyAccess
+			blockSpawner.enabled = true;
+			_animator.Play(throwClip.name);
+			_attackCount = 0;
 			_fireballBehaviorTimer.Reset();
 		}
 	}

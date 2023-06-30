@@ -11,7 +11,7 @@ namespace HelloPico2.InteractableObjects{
 
 		[ShowIf("IsTransformType")] [TitleGroup("Target Setting")]
 		public Transform targetTransform;
-		
+
 		[ShowIf("IsTransformType")] [TitleGroup("Target Setting")]
 		public Vector3 targetOffset;
 
@@ -22,6 +22,7 @@ namespace HelloPico2.InteractableObjects{
 
 		[TitleGroup("Duration Setting")] [EnumToggleButtons]
 		public RotationType rotateType = RotationType.FaceTarget;
+
 		[TitleGroup("Duration Setting")] public float during = 2;
 		[TitleGroup("Duration Setting")] public AnimationCurve movingCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
@@ -85,6 +86,12 @@ namespace HelloPico2.InteractableObjects{
 				case CompleteAction.Inactive:
 					obj.transform.DOScale(Vector3.zero, delayTime)
 							.OnComplete(() => obj.SetActive(false));
+					break;
+				case CompleteAction.MoveAround:
+					var randomOffset = Random.Range(2, -2);
+					var targetPoint = obj.transform.position + new Vector3(randomOffset, 0, 0);
+					obj.transform.DOJump(targetPoint, 3, 1, during)
+							.SetLoops(-1, LoopType.Yoyo);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
@@ -158,6 +165,7 @@ namespace HelloPico2.InteractableObjects{
 		None,
 		Destroy,
 		Inactive,
+		MoveAround,
 	}
 
 	public enum RotationType{

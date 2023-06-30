@@ -720,7 +720,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Atk_Claw_DBL
+  m_Name: Vox_Dragon_Atk_Claw_DBL
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -763,7 +763,7 @@ AnimatorStateMachine:
     m_Position: {x: 220, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102924643837404362}
-    m_Position: {x: 216, y: 24, z: 0}
+    m_Position: {x: 210, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102489723393053512}
     m_Position: {x: 216, y: 72, z: 0}
