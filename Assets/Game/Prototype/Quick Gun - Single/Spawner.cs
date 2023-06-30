@@ -22,6 +22,9 @@ namespace HelloPico2.InteractableObjects{
 		[SerializeField] [TitleGroup("During Setting")] [MinMaxSlider(0, 20, true)]
 		public Vector2 duringMinMax = new Vector2(0.5f, 1f);
 
+		public bool clearCloneListWhenSpawnOver = false;
+		public bool spawnLoop = false;
+
 
 		[TitleGroup("Edit")] public bool edit;
 
@@ -48,6 +51,9 @@ namespace HelloPico2.InteractableObjects{
 
 		private void OnDisable(){
 			cloneList.RemoveAll(x => x == null);
+			if(clearCloneListWhenSpawnOver){
+				cloneList.Clear();
+			}
 		}
 
 		private void FixedUpdate(){
@@ -60,9 +66,20 @@ namespace HelloPico2.InteractableObjects{
 
 		private void Spawn(){
 			var spawnIndex = cloneList.Count;
-			if(spawnIndex >= spawnCount) return;
+			if(spawnIndex >= spawnCount){
+				if(spawnLoop){
+					cloneList.RemoveAll(x => x == null);
+					cloneList.Clear();
+					spawnIndex = 0;
+				}
+				else{
+					return;
+				}
+			}
+
 			var spawnPoint = spawnPointList[spawnIndex];
 			var spawnObject = Instantiate(spawnPrefab, spawnPoint.position, spawnPoint.rotation);
+			spawnObject.SetActive(true);
 			OnSpawn?.Invoke(spawnObject);
 			cloneList.Add(spawnObject);
 		}
@@ -114,7 +131,7 @@ namespace HelloPico2.InteractableObjects{
 					var meshFilter = spawnPrefab.GetComponent<MeshFilter>();
 					if(meshFilter){
 						Gizmos.DrawWireMesh(meshFilter.sharedMesh, Vector3.zero, Quaternion.identity,
-							Vector3.one * 0.5f);
+							spawnPrefab.transform.localScale);
 					}
 					else{
 						Gizmos.DrawWireCube(Vector3.zero, spawnPrefab.transform.localScale);

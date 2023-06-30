@@ -1,49 +1,37 @@
-﻿using System;
-using System.Linq;
-using Game.Project;
+﻿using Game.Project;
 using HelloPico2.InteractableObjects;
 using Sirenix.OdinInspector;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 	public class DragonBoss : MonoBehaviour{
 		[SerializeField] private Spawner fireBallSpawner;
-		[SerializeField] private Spawner enemySpawner;
-		[SerializeField] private Spawner specialFireballSpawner;
-		[SerializeField] private Spawner throwEnemySpawner;
 
 
 		//HitBox
 		[BoxGroup("HitBox")] [SerializeField] private Collider bodyHitBox;
 		[BoxGroup("HitBox")] [SerializeField] private Collider headHitBox;
-		[BoxGroup("HitBox")] [SerializeField] private Collider coreHitBox;
 
 
 		//Animation
 		[SerializeField] private AnimationClip fireBallClip;
-		[SerializeField] private AnimationClip specialFireBallClip;
-		[SerializeField] private AnimationClip throwEnemyClip;
+		[SerializeField] private float fireBallColdDown = 10;
 		private Animator _animator;
 
-		private int _hitCount;
 		private ColdDownTimer _fireballBehaviorTimer;
-		private ColdDownTimer _coreHitBoxTimer;
 
 		[BoxGroup("Health")] public Image hpBar;
 		[BoxGroup("Health")] public float hp = 100;
 
 
 		private void Start(){
-			_fireballBehaviorTimer = new ColdDownTimer(6.5f);
-			_coreHitBoxTimer = new ColdDownTimer(3);
 			_animator = GetComponentInChildren<Animator>();
-			coreHitBox.OnCollisionEnterAsObservable().Subscribe(OnCoreHit);
 			bodyHitBox.OnCollisionEnterAsObservable().Subscribe(x => Hit(x, 0.1f));
 			headHitBox.OnCollisionEnterAsObservable().Subscribe(x => Hit(x, 0.5f));
+			_fireballBehaviorTimer = new ColdDownTimer(fireBallColdDown);
 		}
 
 		private void Hit(Collision obj, float damage){
@@ -51,7 +39,6 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 			hp -= damage;
 			if(hp < 0){
 				fireBallSpawner.gameObject.SetActive(false);
-				specialFireballSpawner.gameObject.SetActive(false);
 				_animator.SetBool("Dead", true);
 				_animator.enabled = false;
 			}
@@ -61,68 +48,18 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 			hpBar.rectTransform.offsetMax = right;
 		}
 
-		private void OnCoreHit(Collision obj){
-			if(!obj.gameObject.TryGetComponent(out Projectile projectile)) return;
-			hp -= 10;
-			if(hp < 0){
-				fireBallSpawner.gameObject.SetActive(false);
-				specialFireballSpawner.gameObject.SetActive(false);
-				_animator.SetBool("Dead", true);
-				_animator.enabled = false;
-			}
-
-			var right = hpBar.rectTransform.offsetMax;
-			right = new Vector3(Mathf.Lerp(-5, 0, hp / 100), right.y);
-			hpBar.rectTransform.offsetMax = right;
-		}
 
 		private void Update(){
-			if(_hitCount >= 5){
-				SpecialFireballBehavior();
-				return;
-			}
-
-			if(enemySpawner.CloneList.Count >= 10){
-				ThrowEnemyBehavior();
-				return;
-			}
-
 			FireballBehavior();
-			ActiveCoreHitBox();
-		}
-
-		private void ActiveCoreHitBox(){
-			coreHitBox.gameObject.SetActive(!_coreHitBoxTimer.CanInvoke());
 		}
 
 		private void FireballBehavior(){
 			if(!_fireballBehaviorTimer.CanInvoke()) return;
 			fireBallSpawner.enabled = false;
+			// ReSharper disable once Unity.InefficientPropertyAccess
 			fireBallSpawner.enabled = true;
 			_animator.Play(fireBallClip.name);
 			_fireballBehaviorTimer.Reset();
-			_hitCount++;
-		}
-
-		private void ThrowEnemyBehavior(){
-			for(var i = 0; i < 5; i++){
-				Destroy(enemySpawner.CloneList[i]);
-				enemySpawner.CloneList.RemoveAt(i);
-			}
-
-			throwEnemySpawner.enabled = false;
-			throwEnemySpawner.enabled = true;
-			_animator.Play(throwEnemyClip.name);
-			_fireballBehaviorTimer.Reset();
-		}
-
-		private void SpecialFireballBehavior(){
-			specialFireballSpawner.enabled = false;
-			specialFireballSpawner.enabled = true;
-			_animator.Play(specialFireBallClip.name);
-			_fireballBehaviorTimer.Reset();
-			_coreHitBoxTimer.Reset();
-			_hitCount = 0;
 		}
 	}
 }
