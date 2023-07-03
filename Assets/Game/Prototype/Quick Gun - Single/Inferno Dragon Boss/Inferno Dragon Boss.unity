@@ -1708,9 +1708,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetType: 1
   targetTransform: {fileID: 1615574667}
-  targetOffset: {x: -2, y: 1.5, z: 11}
+  targetOffset: {x: -2, y: 1.5, z: 8}
   targetVector: {x: 0, y: 0, z: 0}
-  targetBoxSize: {x: 1.5, y: 2, z: 0.5}
+  targetBoxSize: {x: 1.5, y: 1.5, z: 1.5}
   rotateType: 2
   during: 8
   movingCurve:
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   spawnPrefab: {fileID: 8705994454481903296}
   spawnRadius: 0
   spawnCount: 1
-  duringMinMax: {x: 4, y: 6}
+  duringMinMax: {x: 4, y: 10}
   clearCloneListWhenSpawnOver: 1
   spawnLoop: 1
   edit: 1
@@ -2063,9 +2063,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetType: 1
   targetTransform: {fileID: 1615574667}
-  targetOffset: {x: 2, y: 1.5, z: 11}
+  targetOffset: {x: 2, y: 1.5, z: 8}
   targetVector: {x: 0, y: 0, z: 0}
-  targetBoxSize: {x: 1.5, y: 2, z: 0.5}
+  targetBoxSize: {x: 1.5, y: 1.5, z: 1.5}
   rotateType: 2
   during: 8
   movingCurve:
@@ -2111,7 +2111,7 @@ MonoBehaviour:
   spawnPrefab: {fileID: 8705994454481903296}
   spawnRadius: 0
   spawnCount: 1
-  duringMinMax: {x: 6, y: 8}
+  duringMinMax: {x: 6, y: 12}
   clearCloneListWhenSpawnOver: 1
   spawnLoop: 1
   edit: 1
@@ -4520,11 +4520,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01005e9521e94af79c751e1c88346f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duringMinMax: {x: 1.5, y: 6}
+  spawnDuringMinMax: {x: 0.7, y: 2}
   spawnerList:
   - {fileID: 1590875431}
   - {fileID: 626825213}
   - {fileID: 1654834999}
+  during: 5
+  delayOpenTime: 15
 --- !u!4 &1462769419
 Transform:
   m_ObjectHideFlags: 0

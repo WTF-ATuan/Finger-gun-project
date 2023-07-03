@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Core;
 using Game.Project;
 using Sirenix.OdinInspector;
@@ -9,22 +8,46 @@ using Random = UnityEngine.Random;
 namespace Game.Prototype.Quick_Gun___Single{
 	public class SpawnGroupAnimator : MonoBehaviour{
 		[TitleGroup("During Setting")] [MinMaxSlider(0, 20, true)]
-		public Vector2 duringMinMax = new(0.5f, 1f);
+		public Vector2 spawnDuringMinMax = new(0.5f, 1f);
 
 		[InlineButton("AutoGetChildSpawners")] public List<Spawner> spawnerList;
 
-		private ColdDownTimer _timer;
+		[TitleGroup("Wave Setting")] public float during = 5;
+
+		[TitleGroup("Wave Setting")] public float delayOpenTime = 10;
+
+		private bool _active;
+		private ColdDownTimer _spawnerDurationTimer;
+		private ColdDownTimer _waveDurationTimer;
 
 		private void Start(){
-			_timer = new ColdDownTimer();
+			_spawnerDurationTimer = new ColdDownTimer();
+			_waveDurationTimer = new ColdDownTimer(during);
 		}
 
 		private void FixedUpdate(){
-			if(!_timer.CanInvoke()) return;
-			Spawn();
-			var randomDuring = Random.Range(duringMinMax.x, duringMinMax.y);
-			_timer.ModifyDuring(randomDuring);
-			_timer.Reset();
+			if(_active){
+				if(_waveDurationTimer.CanInvoke()){
+					_active = false;
+					_waveDurationTimer.ModifyDuring(delayOpenTime);
+					_waveDurationTimer.Reset();
+				}
+
+				if(!_spawnerDurationTimer.CanInvoke()) return;
+				Spawn();
+				var randomDuring = Random.Range(spawnDuringMinMax.x, spawnDuringMinMax.y);
+				_spawnerDurationTimer.ModifyDuring(randomDuring);
+				_spawnerDurationTimer.Reset();
+			}
+			else{
+				if(!_waveDurationTimer.CanInvoke()){
+					return;
+				}
+
+				_active = true;
+				_waveDurationTimer.ModifyDuring(during);
+				_waveDurationTimer.Reset();
+			}
 		}
 
 		private void Spawn(){
