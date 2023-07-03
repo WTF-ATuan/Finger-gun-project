@@ -1,5 +1,6 @@
-﻿using Game.Project;
-using HelloPico2.InteractableObjects;
+﻿using DG.Tweening;
+using Game.Project;
+using Core;
 using Sirenix.OdinInspector;
 using UniRx;
 using UniRx.Triggers;
@@ -54,6 +55,7 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 			hp -= damage;
 			if(hp < 60){
 				_animator.SetBool($"Fly", true);
+				coreHitBox.transform.DOScale(0, 1.5f).OnComplete(() => coreHitBox.gameObject.SetActive(false));
 				stageTwoEvent?.Invoke();
 				_stageTwo = true;
 			}
@@ -72,6 +74,8 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 		private void CoreHit(){
 			_audioSource.PlayOneShot(coreHitSound);
 			var vfxClone = Instantiate(coreHitParticle, coreHitBox.transform.position, Quaternion.identity);
+			coreHitBox.enabled = false;
+			coreHitBox.transform.DOShakeScale(0.5f).OnComplete(() => coreHitBox.enabled = true);
 			Destroy(vfxClone, 1.5f);
 			Hit(15);
 		}

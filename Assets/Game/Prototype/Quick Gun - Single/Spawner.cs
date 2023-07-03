@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace HelloPico2.InteractableObjects{
+namespace Core{
 	public class Spawner : MonoBehaviour, ISpawner{
 		[Required] public GameObject spawnPrefab;
 

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace HelloPico2.InteractableObjects{
+namespace Core{
     public class SpawnLoopAnimator : MonoBehaviour{
         [SerializeField] [EnumToggleButtons] private SpawnLoopType loopType;
 
