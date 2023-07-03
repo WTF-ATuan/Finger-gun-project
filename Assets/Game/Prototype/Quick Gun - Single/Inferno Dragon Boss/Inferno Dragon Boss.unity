@@ -1127,7 +1127,6 @@ GameObject:
   - component: {fileID: 420039255}
   - component: {fileID: 420039254}
   - component: {fileID: 420039253}
-  - component: {fileID: 420039252}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Concrete
@@ -1150,26 +1149,6 @@ Transform:
   m_Father: {fileID: 1973400179}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!114 &420039252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 420039250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ff3ea705a4a7244a59eef82e75c660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyAfter: 30
-  destroyOnImpact: 0
-  minDestroyTime: 0
-  maxDestroyTime: 0
-  bloodImpactPrefabs: []
-  metalImpactPrefabs: []
-  dirtImpactPrefabs: []
-  concreteImpactPrefabs: []
 --- !u!65 &420039253
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1399,7 +1378,6 @@ GameObject:
   - component: {fileID: 490361017}
   - component: {fileID: 490361016}
   - component: {fileID: 490361015}
-  - component: {fileID: 490361014}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Concrete
@@ -1422,26 +1400,6 @@ Transform:
   m_Father: {fileID: 389916183}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &490361014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490361012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ff3ea705a4a7244a59eef82e75c660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyAfter: 30
-  destroyOnImpact: 0
-  minDestroyTime: 0
-  maxDestroyTime: 0
-  bloodImpactPrefabs: []
-  metalImpactPrefabs: []
-  dirtImpactPrefabs: []
-  concreteImpactPrefabs: []
 --- !u!65 &490361015
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2131,7 +2089,6 @@ GameObject:
   - component: {fileID: 674024141}
   - component: {fileID: 674024140}
   - component: {fileID: 674024139}
-  - component: {fileID: 674024138}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Concrete
@@ -2154,26 +2111,6 @@ Transform:
   m_Father: {fileID: 1973400179}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &674024138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674024136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ff3ea705a4a7244a59eef82e75c660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyAfter: 30
-  destroyOnImpact: 0
-  minDestroyTime: 0
-  maxDestroyTime: 0
-  bloodImpactPrefabs: []
-  metalImpactPrefabs: []
-  dirtImpactPrefabs: []
-  concreteImpactPrefabs: []
 --- !u!65 &674024139
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3361,9 +3298,17 @@ PrefabInstance:
       propertyPath: snappiness
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 1722103904922732011, guid: 69e19bcd487423e46adc6d66dd7d343b, type: 3}
+      propertyPath: returnSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722103904922732011, guid: 69e19bcd487423e46adc6d66dd7d343b, type: 3}
+      propertyPath: recoilRotate.x
+      value: -40
+      objectReference: {fileID: 0}
     - target: {fileID: 3714526841471949995, guid: 69e19bcd487423e46adc6d66dd7d343b, type: 3}
       propertyPath: projectileImpulse
-      value: 100
+      value: 125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69e19bcd487423e46adc6d66dd7d343b, type: 3}
@@ -3615,7 +3560,6 @@ GameObject:
   - component: {fileID: 1152724748}
   - component: {fileID: 1152724747}
   - component: {fileID: 1152724746}
-  - component: {fileID: 1152724745}
   m_Layer: 0
   m_Name: Blocker Middle
   m_TagString: Concrete
@@ -3623,26 +3567,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &1152724745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152724744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ff3ea705a4a7244a59eef82e75c660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyAfter: 30
-  destroyOnImpact: 0
-  minDestroyTime: 0
-  maxDestroyTime: 0
-  bloodImpactPrefabs: []
-  metalImpactPrefabs: []
-  dirtImpactPrefabs: []
-  concreteImpactPrefabs: []
 --- !u!65 &1152724746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3859,7 +3783,6 @@ GameObject:
   - component: {fileID: 1278286051}
   - component: {fileID: 1278286050}
   - component: {fileID: 1278286049}
-  - component: {fileID: 1278286048}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Concrete
@@ -3882,26 +3805,6 @@ Transform:
   m_Father: {fileID: 1973400179}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1278286048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278286046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ff3ea705a4a7244a59eef82e75c660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyAfter: 30
-  destroyOnImpact: 0
-  minDestroyTime: 0
-  maxDestroyTime: 0
-  bloodImpactPrefabs: []
-  metalImpactPrefabs: []
-  dirtImpactPrefabs: []
-  concreteImpactPrefabs: []
 --- !u!65 &1278286049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4088,9 +3991,17 @@ PrefabInstance:
       propertyPath: snappiness
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 1722103904922732011, guid: 69e19bcd487423e46adc6d66dd7d343b, type: 3}
+      propertyPath: returnSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1722103904922732011, guid: 69e19bcd487423e46adc6d66dd7d343b, type: 3}
+      propertyPath: recoilRotate.x
+      value: -40
+      objectReference: {fileID: 0}
     - target: {fileID: 3714526841471949995, guid: 69e19bcd487423e46adc6d66dd7d343b, type: 3}
       propertyPath: projectileImpulse
-      value: 100
+      value: 125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69e19bcd487423e46adc6d66dd7d343b, type: 3}
@@ -4557,7 +4468,6 @@ GameObject:
   - component: {fileID: 1502168248}
   - component: {fileID: 1502168247}
   - component: {fileID: 1502168246}
-  - component: {fileID: 1502168245}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Concrete
@@ -4580,26 +4490,6 @@ Transform:
   m_Father: {fileID: 389916183}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1502168245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1502168243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ff3ea705a4a7244a59eef82e75c660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyAfter: 30
-  destroyOnImpact: 0
-  minDestroyTime: 0
-  maxDestroyTime: 0
-  bloodImpactPrefabs: []
-  metalImpactPrefabs: []
-  dirtImpactPrefabs: []
-  concreteImpactPrefabs: []
 --- !u!65 &1502168246
 BoxCollider:
   m_ObjectHideFlags: 0
