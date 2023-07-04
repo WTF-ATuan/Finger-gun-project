@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core;
 using Game.Project;
 using Sirenix.OdinInspector;
@@ -12,6 +13,7 @@ namespace Game.Prototype.Quick_Gun___Single{
 
 		[InlineButton("AutoGetChildSpawners")] public List<Spawner> spawnerList;
 
+		[TitleGroup("Wave Setting")] public bool spawnLoop = true;
 		[TitleGroup("Wave Setting")] public float during = 5;
 
 		[TitleGroup("Wave Setting")] public float delayOpenTime = 10;
@@ -19,13 +21,34 @@ namespace Game.Prototype.Quick_Gun___Single{
 		private bool _active;
 		private ColdDownTimer _spawnerDurationTimer;
 		private ColdDownTimer _waveDurationTimer;
+		private int _spawnCount;
 
-		private void Start(){
+		private void OnEnable(){
 			_spawnerDurationTimer = new ColdDownTimer();
 			_waveDurationTimer = new ColdDownTimer(during);
 		}
 
+		private void OnDisable(){
+			spawnerList.ForEach(x => x.enabled = false);
+			_spawnCount = 0;
+		}
+
 		private void FixedUpdate(){
+			if(spawnLoop){
+				SpawnWithLoop();
+			}
+			else{
+				if(!_spawnerDurationTimer.CanInvoke()) return;
+				if(_spawnCount >= spawnerList.Count) return;
+				_spawnCount++;
+				Spawn();
+				var randomDuring = Random.Range(spawnDuringMinMax.x, spawnDuringMinMax.y);
+				_spawnerDurationTimer.ModifyDuring(randomDuring);
+				_spawnerDurationTimer.Reset();
+			}
+		}
+
+		private void SpawnWithLoop(){
 			if(_active){
 				if(_waveDurationTimer.CanInvoke()){
 					_active = false;

@@ -12,12 +12,19 @@ using UnityEngine.UI;
 namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 	public class DragonBoss : MonoBehaviour{
 		[BoxGroup("Core")] [SerializeField] private Collider coreHitBox;
+		[BoxGroup("Core")] [SerializeField] private Collider coreHitBoxSecondStage;
 		[BoxGroup("Core")] [SerializeField] private AudioClip coreHitSound;
 		[BoxGroup("Core")] [SerializeField] private GameObject coreHitParticle;
 
 		[BoxGroup("Blocker")] [SerializeField] private Spawner blockSpawner;
 
 		[BoxGroup("Blocker")] [SerializeField] private AnimationClip throwClip;
+
+		[BoxGroup("Group Blocker")] [SerializeField]
+		private SpawnGroupAnimator blockGroupAnimator;
+
+		[BoxGroup("Group Blocker")] [SerializeField]
+		private AnimationClip groupBlockClip;
 
 
 		[BoxGroup("FireBall")] [SerializeField]
@@ -33,6 +40,7 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 		[BoxGroup("Health")] public float hp = 100;
 
 		[SerializeField] private UnityEvent stageTwoEvent;
+		[SerializeField] private UnityEvent onDeadEvent;
 
 
 		private Animator _animator;
@@ -46,16 +54,24 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 			_audioSource = GetComponent<AudioSource>();
 			coreHitBox.OnCollisionEnterAsObservable().Subscribe(x => {
 				if(!x.gameObject.TryGetComponent(out Projectile projectile)) return;
-				CoreHit();
+				CoreHit(coreHitBox);
 			});
+			coreHitBoxSecondStage.OnCollisionEnterAsObservable().Subscribe(x => {
+				if(!x.gameObject.TryGetComponent(out Projectile projectile)) return;
+				CoreHit(coreHitBoxSecondStage);
+			});
+			coreHitBoxSecondStage.gameObject.SetActive(false);
+			coreHitBoxSecondStage.enabled = false;
 			_fireballBehaviorTimer = new ColdDownTimer(fireBallColdDown);
 		}
 
+		[Button]
 		private void Hit(float damage){
 			hp -= damage;
 			if(hp < 60){
 				_animator.SetBool($"Fly", true);
 				coreHitBox.transform.DOScale(0, 1.5f).OnComplete(() => coreHitBox.gameObject.SetActive(false));
+				coreHitBoxSecondStage.gameObject.SetActive(true);
 				stageTwoEvent?.Invoke();
 				_stageTwo = true;
 			}
@@ -63,7 +79,8 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 			if(hp < 0){
 				fireBallSpawner.gameObject.SetActive(false);
 				_animator.SetBool($"Dead", true);
-				_animator.enabled = false;
+				onDeadEvent?.Invoke();
+				enabled = false;
 			}
 
 			var right = hpBar.rectTransform.offsetMax;
@@ -71,11 +88,11 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 			hpBar.rectTransform.offsetMax = right;
 		}
 
-		private void CoreHit(){
+		private void CoreHit(Collider hitBox){
 			_audioSource.PlayOneShot(coreHitSound);
-			var vfxClone = Instantiate(coreHitParticle, coreHitBox.transform.position, Quaternion.identity);
-			coreHitBox.enabled = false;
-			coreHitBox.transform.DOShakeScale(0.5f).OnComplete(() => coreHitBox.enabled = true);
+			var vfxClone = Instantiate(coreHitParticle, hitBox.transform.position, Quaternion.identity);
+			hitBox.gameObject.SetActive(false);
+			hitBox.transform.DOShakeScale(1f).OnComplete(() => hitBox.gameObject.SetActive(true));
 			Destroy(vfxClone, 1.5f);
 			Hit(15);
 		}
@@ -89,6 +106,9 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 				else{
 					ThrowObject();
 				}
+			}
+			else{
+				ThrowGroupBlocker();
 			}
 		}
 
@@ -109,6 +129,20 @@ namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
 			blockSpawner.enabled = true;
 			_animator.Play(throwClip.name);
 			_attackCount = 0;
+			_fireballBehaviorTimer.Reset();
+		}
+
+		private void ThrowGroupBlocker(){
+			if(!_fireballBehaviorTimer.CanInvoke()) return;
+			coreHitBoxSecondStage.enabled = true;
+			var localRotation = coreHitBoxSecondStage.transform.localEulerAngles;
+			localRotation.y += 180;
+			coreHitBoxSecondStage.transform.DOLocalRotate(localRotation, 3f)
+					.OnComplete(() => coreHitBoxSecondStage.enabled = false);
+			blockGroupAnimator.enabled = false;
+			blockGroupAnimator.enabled = true;
+			_animator.Play(groupBlockClip.name);
+			_fireballBehaviorTimer.ModifyDuring(15);
 			_fireballBehaviorTimer.Reset();
 		}
 	}
