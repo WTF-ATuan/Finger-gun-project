@@ -12,7 +12,8 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		public List<Transform> teleportPointList;
 		public Transform[] teleportTriggers = new Transform[4];
 		[Required] public Transform playerTransform;
-
+		public float teleportDuration = 0.5f;
+		
 		private void Start(){
 			teleportTriggers.ForEach(x =>
 					x.OnCollisionEnterAsObservable()
@@ -38,7 +39,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			if(closestPoint == null) return;
 			var teleportPosition = closestPoint.position;
 			teleportPosition.y = playerTransform.position.y;
-			playerTransform.DOMove(teleportPosition, 0.5f)
+			playerTransform.DOMove(teleportPosition, teleportDuration)
 					.SetEase(Ease.OutCubic);
 		}
 	}
