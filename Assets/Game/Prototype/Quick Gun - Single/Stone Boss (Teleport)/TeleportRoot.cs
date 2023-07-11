@@ -13,14 +13,14 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		public Transform[] teleportTriggers = new Transform[4];
 		[Required] public Transform playerTransform;
 		public float teleportDuration = 0.5f;
-		
+
 		private void Start(){
 			teleportTriggers.ForEach(x =>
 					x.OnCollisionEnterAsObservable()
 							.Subscribe(_ => {
 								var direction = (x.transform.position - playerTransform.position).normalized;
 								Teleport(direction);
-								x.DOShakePosition(0.5f);
+								x.DOShakeScale(teleportDuration / 2);
 							}));
 		}
 
