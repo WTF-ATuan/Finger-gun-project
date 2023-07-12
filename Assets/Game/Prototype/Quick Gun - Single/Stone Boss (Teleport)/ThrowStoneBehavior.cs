@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 	public class ThrowStoneBehavior : StateMachineBehaviour{
 		private StoneBoss _bossRoot;
-
+		
 		private void Awake(){
 			_bossRoot = FindObjectOfType<StoneBoss>();
 		}

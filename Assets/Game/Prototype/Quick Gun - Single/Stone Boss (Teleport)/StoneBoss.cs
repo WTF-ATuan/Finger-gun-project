@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Core;
+using DG.Tweening;
 using Game.Project;
 using Sirenix.OdinInspector;
 using UniRx;
@@ -21,11 +23,17 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[BoxGroup("DetectData")] public float angleBetweenPlayer;
 		[BoxGroup("DetectData")] public float distanceBetweenPlayer;
 
+		[BoxGroup("Core")] public Collider coreCollider;
+		[BoxGroup("Core")] public GameObject coreHitVFX;
+		[BoxGroup("Core")] public AudioClip coreHitSFX;
+
 
 		[BoxGroup("Hit")] public List<Collider> footColliderList;
 		[BoxGroup("Hit")] public GameObject hitVFX;
 		[BoxGroup("Hit")] public AudioClip hitSFX;
 		[BoxGroup("Hit")] public float footHealth = 25;
+
+		[BoxGroup("Stone")] public Spawner stoneSpawner;
 
 		public ColdDownTimer ThrowStoneTimer;
 
@@ -35,6 +43,16 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			ThrowStoneTimer = new ColdDownTimer(10f);
 			footColliderList.ForEach(x => x.OnCollisionEnterAsObservable()
 					.Subscribe(FootHit));
+			coreCollider.OnCollisionEnterAsObservable().Subscribe(CoreHit);
+		}
+
+		private void CoreHit(Collision col){
+			if(!col.gameObject.TryGetComponent(out Projectile projectile)) return;
+			var contactPoint = col.GetContact(0);
+			var vfxClone = Instantiate(coreHitVFX, contactPoint.point, Quaternion.Euler(contactPoint.normal));
+			vfxClone.AddComponent<AudioSource>().PlayOneShot(coreHitSFX);
+			Destroy(vfxClone, 1f);
+			transform.DOLookAt(player.position, 0.75f, AxisConstraint.Y);
 		}
 
 		private void FootHit(Collision col){
@@ -82,7 +100,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		}
 
 		private bool IsDizzy(){
-			return footHealth > 0;
+			return footHealth < 1;
 		}
 
 		private bool CanStep(){
@@ -97,6 +115,11 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			var playerInAngle = attackAngleRange.x < angleBetweenPlayer && angleBetweenPlayer < attackAngleRange.y;
 			var playerInDistance = distanceBetweenPlayer > attackDistance;
 			return playerInAngle && playerInDistance;
+		}
+
+		public void ThrowStone(){
+			stoneSpawner.enabled = false;
+			stoneSpawner.enabled = true;
 		}
 
 		private void OnDrawGizmos(){

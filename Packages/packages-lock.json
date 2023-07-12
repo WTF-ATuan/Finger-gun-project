@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.av.smart-hierarchy": {
+      "version": "https://github.com/neon-age/Smart-Hierarchy.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "45caa0850b3b285e226687f148a317707f316edc"
+    },
+    "com.av.smart-inspector": {
+      "version": "0.6.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
     "com.neuecc.unirx": {
       "version": "7.1.0",
       "depth": 0,

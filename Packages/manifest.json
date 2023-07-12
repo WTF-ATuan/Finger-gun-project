@@ -22,6 +22,8 @@
     }
   ],
   "dependencies": {
+    "com.av.smart-hierarchy": "https://github.com/neon-age/Smart-Hierarchy.git",
+    "com.av.smart-inspector": "0.6.0",
     "com.neuecc.unirx": "7.1.0",
     "com.svermeulen.extenject": "9.2.0-stcf3",
     "com.unity.2d.sprite": "1.0.0",

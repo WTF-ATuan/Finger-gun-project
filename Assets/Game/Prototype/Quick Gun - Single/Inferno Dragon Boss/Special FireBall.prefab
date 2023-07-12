@@ -4975,9 +4975,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1144198993006198291}
   - component: {fileID: 8740916452850434442}
-  - component: {fileID: 5797557636510153999}
   - component: {fileID: 4006123928239195092}
   - component: {fileID: 4364408137424408203}
+  - component: {fileID: 6937737484670469273}
   m_Layer: 15
   m_Name: Special FireBall
   m_TagString: Untagged
@@ -4994,7 +4994,7 @@ Transform:
   m_GameObject: {fileID: 6140041956159590528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.0019999743, y: 1.344, z: 2.39}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5834574176975792911}
@@ -5019,19 +5019,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!65 &5797557636510153999
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6140041956159590528}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!96 &4006123928239195092
 TrailRenderer:
   serializedVersion: 2
@@ -5164,6 +5151,19 @@ MonoBehaviour:
   - {fileID: 4587651611338842, guid: 5e02303289b3c494e8e185be0fbbd405, type: 3}
   concreteImpactPrefabs:
   - {fileID: 4587651611338842, guid: 5e02303289b3c494e8e185be0fbbd405, type: 3}
+--- !u!135 &6937737484670469273
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140041956159590528}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8649013596037981627
 GameObject:
   m_ObjectHideFlags: 0
