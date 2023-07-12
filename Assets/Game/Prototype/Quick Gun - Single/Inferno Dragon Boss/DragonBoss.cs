@@ -6,7 +6,6 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.Prototype.Quick_Gun___Single.Inferno_Dragon_Boss{
