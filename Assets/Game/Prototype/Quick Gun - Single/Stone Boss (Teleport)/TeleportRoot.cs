@@ -18,29 +18,36 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			teleportTriggers.ForEach(x =>
 					x.OnCollisionEnterAsObservable()
 							.Subscribe(_ => {
-								var direction = (x.transform.position - playerTransform.position).normalized;
-								Teleport(direction);
-								x.DOShakeScale(teleportDuration / 2);
+								var closePoint = FindClosePoint(x);
+								Teleport(closePoint.position);
+								x.DOShakeRotation(teleportDuration / 2);
 							}));
 		}
 
-		private void Teleport(Vector3 direction){
-			var playerPosition = playerTransform.position + direction * 7.5f;
-			Transform closestPoint = null;
+		private Transform FindClosePoint(Transform trigger){
 			var closestDistance = Mathf.Infinity;
-
+			Transform closestPoint = null;
 			foreach(var teleportPoint in teleportPointList){
-				var distance = Vector3.Distance(playerPosition, teleportPoint.position);
+				var distance = Vector3.Distance(trigger.position, teleportPoint.position);
 				if(!(distance < closestDistance)) continue;
 				closestDistance = distance;
 				closestPoint = teleportPoint;
 			}
 
-			if(closestPoint == null) return;
-			var teleportPosition = closestPoint.position;
+			return closestPoint;
+		}
+
+		private void Teleport(Vector3 teleportPosition){
 			teleportPosition.y = playerTransform.position.y;
 			playerTransform.DOMove(teleportPosition, teleportDuration)
 					.SetEase(Ease.OutCubic);
+		}
+
+		[Button]
+		private void Test(Transform trigger){
+			var closePoint = FindClosePoint(trigger);
+			Teleport(closePoint.position);
+			trigger.DOShakeRotation(teleportDuration / 2);
 		}
 	}
 }
