@@ -22,7 +22,7 @@ namespace Core{
 		[SerializeField] [TitleGroup("During Setting")] [MinMaxSlider(0, 20, true)]
 		public Vector2 duringMinMax = new Vector2(0.5f, 1f);
 
-		public bool clearCloneListWhenSpawnOver = false;
+		public bool keepCloneCount = false;
 		public bool spawnLoop = false;
 
 
@@ -51,13 +51,11 @@ namespace Core{
 
 		private void OnDisable(){
 			cloneList.RemoveAll(x => x == null);
-			if(clearCloneListWhenSpawnOver){
-				cloneList.Clear();
-			}
 		}
 
 		private void FixedUpdate(){
 			if(!_timer.CanInvoke()) return;
+			if(keepCloneCount) cloneList.RemoveAll(x => x == null);
 			Spawn();
 			var randomDuring = Random.Range(duringMinMax.x, duringMinMax.y);
 			_timer.ModifyDuring(randomDuring);
@@ -134,7 +132,12 @@ namespace Core{
 							spawnPrefab.transform.localScale);
 					}
 					else{
-						Gizmos.DrawWireCube(Vector3.zero, spawnPrefab.transform.localScale);
+						if(spawnPrefab.transform.localScale.magnitude < 0.5){
+							Gizmos.DrawWireCube(Vector3.zero, Vector3.one * 0.5f);
+						}
+						else{
+							Gizmos.DrawWireCube(Vector3.zero, spawnPrefab.transform.localScale);
+						}
 					}
 				}
 			}
