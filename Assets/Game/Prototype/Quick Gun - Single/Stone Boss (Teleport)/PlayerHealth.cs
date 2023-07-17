@@ -26,6 +26,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			EventAggregator.OnEvent<TargetHitEvent>()
 					.Subscribe(x => {
 						_currentHp += 5;
+						if(_currentHp >= playerMaxHp) _currentHp = playerMaxHp;
 						UpdateHealthUI();
 					});
 		}
@@ -33,10 +34,10 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		private void OnHitBoxHit(Collider obj){
 			if(!obj.TryGetComponent(out Projectile projectile)) return;
 			_currentHp -= 20;
+			UpdateHealthUI();
 		}
 
 		private void UpdateHealthUI(){
-			// ReSharper disable once PossibleLossOfFraction
 			// 20 / 100 0.2f;
 			var lerpValue = _currentHp / playerMaxHp;
 			var lerpColor = Color.Lerp(badColor, healthyColor, lerpValue);
