@@ -9,7 +9,6 @@ using UnityEngine;
 
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 	public class TeleportRoot : MonoBehaviour{
-		public List<Transform> teleportPointList;
 		public Transform[] teleportTriggers = new Transform[4];
 		[Required] public Transform playerTransform;
 		public float teleportDuration = 0.5f;
@@ -29,7 +28,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		private Transform FindClosePoint(Transform trigger){
 			var closestDistance = Mathf.Infinity;
 			Transform closestPoint = null;
-			foreach(var teleportPoint in teleportPointList){
+			foreach(var teleportPoint in teleportTriggers){
 				var distance = Vector3.Distance(trigger.position, teleportPoint.position);
 				if(!(distance < closestDistance)) continue;
 				closestDistance = distance;
