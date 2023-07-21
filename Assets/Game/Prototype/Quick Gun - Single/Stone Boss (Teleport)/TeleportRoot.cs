@@ -15,12 +15,14 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		public float teleportDuration = 0.5f;
 
 		private void Start(){
-			teleportTriggers.ForEach(x =>
-					x.OnCollisionEnterAsObservable()
+			teleportTriggers.ForEach(trigger =>
+					trigger.OnCollisionEnterAsObservable()
 							.Subscribe(_ => {
-								var closePoint = FindClosePoint(x);
+								var closePoint = FindClosePoint(trigger);
+								teleportTriggers.ForEach(
+									teleport => teleport.GetComponent<Collider>().enabled = true);
+								trigger.GetComponent<Collider>().enabled = false;
 								Teleport(closePoint.position);
-								x.DOShakeRotation(teleportDuration / 2);
 							}));
 		}
 
