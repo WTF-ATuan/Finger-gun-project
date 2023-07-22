@@ -32,8 +32,14 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		}
 
 		private void OnHitBoxHit(Collider obj){
-			if(!obj.TryGetComponent(out Projectile projectile)) return;
-			_currentHp -= 20;
+			if(obj.TryGetComponent(out Projectile projectile)){
+				_currentHp -= 20;
+			}
+
+			if(obj.CompareTag("Concrete")){
+				_currentHp -= 80;
+			}
+
 			UpdateHealthUI();
 		}
 

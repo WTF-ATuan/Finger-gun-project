@@ -17,17 +17,23 @@ namespace Game.Prototype.Quick_Gun___Single{
 		}
 
 		private void OnTriggerEnter(Collider other){
+			if(other.CompareTag("Concrete")){
+				CameraHitEffect(1.5f);
+				ControllerHitEffect(0.5f);
+				_audioSource.PlayOneShot(hitSound);
+			}
+
 			if(!other.TryGetComponent(out Projectile projectile)) return;
-			CameraHitEffect();
-			ControllerHitEffect();
+			CameraHitEffect(0.5f);
+			ControllerHitEffect(0.35f);
 			_audioSource.PlayOneShot(hitSound);
 			Destroy(projectile.gameObject);
 		}
 
 		[Button]
-		private void CameraHitEffect(){
+		private void CameraHitEffect(float duration){
 			hitEffectImage.gameObject.SetActive(true);
-			hitEffectImage.DOFade(1 , 0.5f)
+			hitEffectImage.DOFade(1, duration)
 					.OnComplete(() => {
 						hitEffectImage.gameObject.SetActive(false);
 						hitEffectImage.DOFade(0.1f, 0);
@@ -35,10 +41,10 @@ namespace Game.Prototype.Quick_Gun___Single{
 		}
 
 		[Button]
-		private void ControllerHitEffect(){
+		private void ControllerHitEffect(float duration){
 			OVRInput.SetControllerVibration(1, 1f, OVRInput.Controller.RTouch);
 			OVRInput.SetControllerVibration(1, 1f, OVRInput.Controller.LTouch);
-			Invoke(nameof(StopHaptic), 0.35f);
+			Invoke(nameof(StopHaptic), duration);
 		}
 
 		private void StopHaptic(){
