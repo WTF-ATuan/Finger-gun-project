@@ -1,6 +1,5 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 	public class PunchBossAdapter : MonoBehaviour{
@@ -10,19 +9,12 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[BoxGroup("Weakness")] public BoxCollider weaknessFront;
 		[BoxGroup("Weakness")] public BoxCollider weaknessBack;
 
-		public Collider lightAttackHitbox;
 		public int hitCount;
 
 
-		public void LightAttackStart(){
-			lightAttackHitbox.gameObject.SetActive(true);
+		public void LightAttack(){
 			hitCount += 1;
 		}
-
-		public void LightAttackOver(){
-			lightAttackHitbox.gameObject.SetActive(false);
-		}
-
 		public void HardAttack(){
 			hitCount = 0;
 		}
