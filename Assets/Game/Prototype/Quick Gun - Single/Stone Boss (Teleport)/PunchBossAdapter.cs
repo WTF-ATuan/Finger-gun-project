@@ -5,6 +5,7 @@ using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 	public class PunchBossAdapter : MonoBehaviour{
@@ -17,14 +18,15 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[BoxGroup("Weakness")] public BoxCollider weaknessBack;
 		[BoxGroup("Weakness")] public GameObject weaknessHitVFX;
 
+		[BoxGroup("Health")] public Image hpBar;
 
 		[ReadOnly] public int hitCount;
 		[ReadOnly] public float bossHp;
 		[ReadOnly] public int bossCurrentStage = 1;
 
-		public UnityEvent enableSecondStage;
-		public UnityEvent enableThirdStage;
-		public UnityEvent enableBossDead;
+		[FoldoutGroup("Event")] public UnityEvent enableSecondStage;
+		[FoldoutGroup("Event")] public UnityEvent enableThirdStage;
+		[FoldoutGroup("Event")] public UnityEvent enableBossDead;
 
 		private void Start(){
 			weaknessFront.OnCollisionEnterAsObservable().Subscribe(OnWeaknessHit);
@@ -34,6 +36,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		}
 
 		[Button]
+		[FoldoutGroup("Event")]
 		private void TestHit(float amount = 10){
 			DamageBoss(amount);
 		}
@@ -51,21 +54,31 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 
 		private void DamageBoss(float damageAmount = 7.5f){
 			bossHp -= damageAmount;
+			UpdateHpBar();
 			if(bossHp > 0) return;
 			bossCurrentStage += 1;
 			switch(bossCurrentStage){
 				case 2:
 					enableSecondStage?.Invoke();
+					hpBar.color = Color.yellow;
 					break;
 				case 3:
 					enableThirdStage?.Invoke();
+					hpBar.color = Color.red;
 					break;
 				case 4:
 					enableBossDead?.Invoke();
 					return;
 			}
 
-			bossHp = 100;
+			bossHp = bossStartHp;
+			UpdateHpBar();
+		}
+
+		private void UpdateHpBar(){
+			var right = hpBar.rectTransform.offsetMax;
+			right = new Vector3(Mathf.Lerp(-5, 0, bossHp / bossStartHp), right.y);
+			hpBar.rectTransform.offsetMax = right;
 		}
 
 		public void ModifyTurnDuration(float duration){
