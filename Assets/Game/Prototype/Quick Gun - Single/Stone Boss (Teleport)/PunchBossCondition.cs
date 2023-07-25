@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 	public class PunchBossCondition : StateMachineBehaviour{
-		[SerializeField] private float turningDuration = 6.5f;
 		private Transform _player;
 		private Collider _detectTrigger;
 		private Animator _animator;
@@ -46,7 +45,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			var rotation = Quaternion.LookRotation((_player.position - _animator.transform.position).normalized);
 			var eulerAngles = _animator.transform.eulerAngles;
 			eulerAngles.y = rotation.eulerAngles.y + 180;
-			_animator.transform.DORotate(eulerAngles, turningDuration).SetEase(Ease.OutQuad);
+			_animator.transform.DORotate(eulerAngles, _adapter.bossTurningDuration).SetEase(Ease.OutQuad);
 		}
 
 		private bool PlayerInRange(){
