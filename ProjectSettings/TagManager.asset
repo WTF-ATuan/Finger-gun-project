@@ -7,6 +7,8 @@ TagManager:
   - Concrete
   - Target
   - Metal
+  - ExplosiveBarrel
+  - GasTank
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - target
   - Water
   - UI
-  - 
+  - scene
   - 
   - 
   - 
