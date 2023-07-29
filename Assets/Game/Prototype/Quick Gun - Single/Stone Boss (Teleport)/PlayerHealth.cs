@@ -4,6 +4,7 @@ using TMPro;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
@@ -16,6 +17,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[BoxGroup("UI")] [SerializeField] private Color badColor = Color.red;
 
 		[SerializeField] private float playerMaxHp = 100;
+		[SerializeField] private UnityEvent onPlayerDead;
 		private float _currentHp;
 
 		private void Start(){
@@ -26,7 +28,6 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			EventAggregator.OnEvent<TargetHitEvent>()
 					.Subscribe(x => {
 						_currentHp += 5;
-						if(_currentHp >= playerMaxHp) _currentHp = playerMaxHp;
 						UpdateHealthUI();
 					});
 		}
@@ -37,9 +38,10 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			}
 
 			if(obj.CompareTag("Concrete")){
-				_currentHp -= 80;
+				_currentHp -= 50;
 			}
 
+			if(_currentHp <= 0) onPlayerDead?.Invoke();
 			UpdateHealthUI();
 		}
 
