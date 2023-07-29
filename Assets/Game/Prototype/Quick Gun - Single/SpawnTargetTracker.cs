@@ -20,6 +20,15 @@ namespace Core{
 
 		[TitleGroup("Target Setting")] public Vector3 targetBoxSize = Vector3.one;
 
+		[TitleGroup("Movement Setting")] [EnumToggleButtons]
+		public MovementType movementType = MovementType.Linear;
+
+		[TitleGroup("Movement Setting")] [ShowIf("@movementType", MovementType.Curve)]
+		public float height = 5;
+
+		[TitleGroup("Movement Setting")] [ShowIf("@movementType", MovementType.Curve)]
+		public Vector3 direction = Vector3.up;
+
 		[TitleGroup("Duration Setting")] [EnumToggleButtons]
 		public RotationType rotateType = RotationType.FaceTarget;
 
@@ -55,9 +64,25 @@ namespace Core{
 			obj.transform.DOScale(Vector3.zero, 0f);
 			obj.transform.DOScale(currentScale, 0.5f);
 			SetRotation(objTransform, targetRandomPosition);
-			objTransform.DOMove(targetRandomPosition, during)
-					.SetEase(movingCurve)
-					.OnComplete(() => OnCompleteMoving(obj));
+			DoMovement(obj, targetRandomPosition);
+		}
+
+		private void DoMovement(GameObject obj, Vector3 targetRandomPosition){
+			switch(movementType){
+				case MovementType.Linear:
+					obj.transform.DOMove(targetRandomPosition, during)
+							.SetEase(movingCurve)
+							.OnComplete(() => OnCompleteMoving(obj));
+					break;
+				case MovementType.Curve:
+					var pathPoints = GenerateCurvePathPoints(targetRandomPosition);
+					obj.transform.DOPath(pathPoints, during, PathType.CatmullRom, PathMode.Full3D, 10, debugColor)
+							.SetEase(movingCurve)
+							.OnComplete(() => OnCompleteMoving(obj));
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
 		}
 
 		private void SetRotation(Transform objTransform, Vector3 targetRandomPosition){
@@ -125,6 +150,23 @@ namespace Core{
 			}
 		}
 
+		private Vector3[] GenerateCurvePathPoints(Vector3 targetPosition){
+			const int numPoints = 50;
+			var pathPoints = new Vector3[numPoints + 2]; // 加2是为了包括起始点和目标位置
+			pathPoints[0] = transform.position;
+			pathPoints[numPoints + 1] = targetPosition;
+
+			for(var i = 1; i <= numPoints; i++){
+				var t = i / (float)(numPoints + 1);
+				var offset = height * (t - t * t); // 控制曲线的高度
+
+				pathPoints[i] = Vector3.Lerp(pathPoints[0], pathPoints[numPoints + 1], t) +
+								direction * offset;
+			}
+
+			return pathPoints;
+		}
+
 		private void OnDrawGizmosSelected(){
 			if(!debugLine){
 				return;
@@ -172,5 +214,10 @@ namespace Core{
 		Default,
 		Zero,
 		FaceTarget
+	}
+
+	public enum MovementType{
+		Linear,
+		Curve,
 	}
 }
