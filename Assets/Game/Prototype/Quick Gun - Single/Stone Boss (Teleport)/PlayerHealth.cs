@@ -34,11 +34,11 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 
 		private void OnHitBoxHit(Collider obj){
 			if(obj.TryGetComponent(out Projectile projectile)){
-				_currentHp -= 20;
+				_currentHp -= 15;
 			}
 
 			if(obj.CompareTag("Concrete")){
-				_currentHp -= 50;
+				_currentHp -= 45;
 			}
 
 			if(_currentHp <= 0) onPlayerDead?.Invoke();
