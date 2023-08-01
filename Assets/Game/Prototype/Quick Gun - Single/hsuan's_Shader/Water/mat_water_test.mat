@@ -45,8 +45,8 @@ Material:
     - _Cull: 2
     - _DstBlend: 10
     - _Fullscreenintensity: 0.5
-    - _NoiseScale: 69.5
-    - _NoiseSpeed: 0.043
+    - _NoiseScale: 104.9
+    - _NoiseSpeed: 0.061
     - _NoiseStrength: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -56,7 +56,7 @@ Material:
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _foam_depth: 16.9
+    - _foam_depth: 24.35
     - _vignettelntensity: 1.039
     m_Colors:
     - _Color: {r: 0.31780377, g: 0.5377358, b: 0, a: 0}
