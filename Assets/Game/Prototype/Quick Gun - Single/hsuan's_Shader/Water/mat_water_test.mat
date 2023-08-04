@@ -74,10 +74,10 @@ Material:
     - _vignettelntensity: 1.039
     m_Colors:
     - _Color: {r: 0.31780377, g: 0.5377358, b: 0, a: 0}
-    - _DepthWaterColor: {r: 0.4542097, g: 0.5566038, b: 0.4542097, a: 0.4392157}
+    - _DepthWaterColor: {r: 0.44348523, g: 0.6226415, b: 0.44348523, a: 0.4392157}
     - _FullscreenColor: {r: 0.8490566, g: 0.35644358, b: 0.35644358, a: 0}
     - _RippleCenter: {r: 0, g: 0, b: 0, a: 0}
-    - _ShallowWaterColor: {r: 0.10070309, g: 0.2924528, b: 0.15082897, a: 0.78039217}
+    - _ShallowWaterColor: {r: 0.025231391, g: 0.066037714, b: 0.03520627, a: 0.78039217}
     - _WaterColor: {r: 0, g: 0, b: 0, a: 1}
     - _WaveHighX: {r: 0.04, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
