@@ -44,15 +44,29 @@ Material:
     - _CastShadows: 0
     - _Cull: 2
     - _DstBlend: 10
+    - _FlowNoiseScale: 140
+    - _FlowNoiseStrength: 0.1
+    - _FlowSpeed: 0.013
     - _Fullscreenintensity: 0.5
-    - _NoiseScale: 104.9
-    - _NoiseSpeed: 0.061
+    - _NoiseScale: 200
+    - _NoiseScale_color: 50
+    - _NoiseSpeed: 0.006
     - _NoiseStrength: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _SrcBlend: 5
     - _Surface: 1
     - _VignetteRadiusPower: 4.78
+    - _WaterColorScale: 33
+    - _WaterDepth: 5.68
+    - _WaterDepthStrength: 0.33
+    - _WaveNoise: 24.6
+    - _WaveNoiseScale: 242.77
+    - _WavePositionX: 0.31
+    - _WavePostionY: 0.14
+    - _WaveSpeed: 0.005
+    - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
@@ -60,9 +74,12 @@ Material:
     - _vignettelntensity: 1.039
     m_Colors:
     - _Color: {r: 0.31780377, g: 0.5377358, b: 0, a: 0}
+    - _DepthWaterColor: {r: 0.4542097, g: 0.5566038, b: 0.4542097, a: 0.4392157}
     - _FullscreenColor: {r: 0.8490566, g: 0.35644358, b: 0.35644358, a: 0}
     - _RippleCenter: {r: 0, g: 0, b: 0, a: 0}
-    - _WaterColor: {r: 0.094918124, g: 0.254717, b: 0.16340336, a: 1}
+    - _ShallowWaterColor: {r: 0.10070309, g: 0.2924528, b: 0.15082897, a: 0.78039217}
+    - _WaterColor: {r: 0, g: 0, b: 0, a: 1}
+    - _WaveHighX: {r: 0.04, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8017556249898115760
 MonoBehaviour:
