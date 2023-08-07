@@ -12,6 +12,9 @@ namespace Game.Prototype.Pistol{
 		[SerializeField] private float snappiness;
 		[SerializeField] private float returnSpeed;
 
+		public void ModifiedOriginRotation(Vector3 targetRotation){
+			_originRotationEuler = targetRotation;
+		}
 
 		private void Start(){
 			_originRotationEuler = transform.eulerAngles;
