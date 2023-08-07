@@ -13406,9 +13406,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b3bff20b0742aa88b57d46371f9fa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilRotate: {x: 0, y: 0, z: -40}
+  recoilRotate: {x: 0, y: 0, z: -50}
   snappiness: 50
-  returnSpeed: 15
+  returnSpeed: 7
 --- !u!33 &3667771336609825273
 MeshFilter:
   m_ObjectHideFlags: 0
