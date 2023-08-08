@@ -1,22 +1,38 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
 namespace Game.Prototype.Pistol{
 	public class ShotGunBinder : MonoBehaviour{
-		[SerializeField] private GameObject projectile;
-		[SerializeField] private GameObject fireVFX;
-		[SerializeField] private int ammoMax = 3;
+		[TitleGroup("Setting")] [SerializeField]
+		private GameObject projectile;
+
+		[TitleGroup("Setting")] [SerializeField]
+		private float projectileImpulse = 300;
+
+		[TitleGroup("Setting")] [SerializeField]
+		private int ammoMax = 3;
+
+		[TitleGroup("Setting")] [SerializeField]
+		private Transform[] muzzles;
+
+		[TitleGroup("View")] [SerializeField] private AudioClip fireClip;
+		[TitleGroup("View")] [SerializeField] private AudioClip emptyClip;
+		[TitleGroup("View")] [SerializeField] private AudioClip reloadClip;
+		[TitleGroup("View")] [SerializeField] private GameObject fireVFX;
+		[TitleGroup("View")] [SerializeField] private TMP_Text ammoCountText;
+
+
 		private PistolRecoil _recoil;
-		[SerializeField] private AudioClip fireClip;
-		[SerializeField] private AudioClip vibrateClip;
 		private AudioSource _audioPlayer;
 		private int _currentAmmo;
+
 
 		private void Start(){
 			_recoil = GetComponent<PistolRecoil>();
 			_audioPlayer = gameObject.AddComponent<AudioSource>();
-			_currentAmmo = ammoMax;
+			ModifyCurrentAmmo(ammoMax);
 		}
 
 		private void Update(){
@@ -24,38 +40,63 @@ namespace Game.Prototype.Pistol{
 					OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger);
 			if(openingFire){
 				Fire();
-				_recoil.Recoil();
-				_audioPlayer.PlayOneShot(fireClip);
-				SimpleHaptic();
 			}
-			
-			if(transform.eulerAngles.z is > 45 and < 75 && _currentAmmo < ammoMax){
+
+			if(transform.eulerAngles.z is > 40 and < 70 && _currentAmmo < ammoMax){
 				Reload();
 			}
 		}
 
 		private void Fire(){
-			_currentAmmo--;
+			if(_currentAmmo < 1){
+				_audioPlayer.PlayOneShot(emptyClip);
+				return;
+			}
+
+			ModifyCurrentAmmo(_currentAmmo - 1);
+			foreach(var muzzle in muzzles){
+				var bullet = Instantiate(projectile, muzzle.position, muzzle.rotation);
+				bullet.GetComponent<Rigidbody>().velocity = muzzle.forward * projectileImpulse;
+			}
+
+			var vfxClone = Instantiate(fireVFX, muzzles[0].position, muzzles[0].rotation);
+			Destroy(vfxClone, 1.5f);
+			_recoil.Recoil();
+			_audioPlayer.PlayOneShot(fireClip);
+			SimpleHaptic();
 		}
 
 		[Button]
 		private void Reload(){
-			_currentAmmo = ammoMax;
+			ModifyCurrentAmmo(ammoMax);
 			_recoil.enabled = false;
 			var targetAngle = transform.eulerAngles;
 			targetAngle.z += 360;
-			transform.DORotate(targetAngle, 0.3f, RotateMode.FastBeyond360).OnComplete(() => {
-				_recoil.enabled = true;
-			});
+			transform.DORotate(targetAngle, 0.3f, RotateMode.FastBeyond360)
+					.OnComplete(() => { _recoil.enabled = true; });
+			_audioPlayer.PlayOneShot(reloadClip);
+		}
+
+		private void ModifyCurrentAmmo(int amount){
+			_currentAmmo = Mathf.Clamp(amount, 0, ammoMax);
+			ammoCountText.text = _currentAmmo.ToString();
 		}
 
 		private void SimpleHaptic(){
-			OVRInput.SetControllerVibration(100, 1, OVRInput.Controller.RTouch);
-			Invoke(nameof(StopHaptic), 0.15f);
+			OVRInput.SetControllerVibration(500, 0.9f, OVRInput.Controller.RTouch);
+			Invoke(nameof(StopHaptic), 0.2f);
 		}
 
 		private void StopHaptic(){
 			OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+		}
+
+		private void OnDrawGizmos(){
+			if(muzzles.Length < 1) return;
+			foreach(var muzzle in muzzles){
+				Gizmos.color = Color.green;
+				Gizmos.DrawRay(muzzle.position, muzzle.forward);
+			}
 		}
 	}
 }
