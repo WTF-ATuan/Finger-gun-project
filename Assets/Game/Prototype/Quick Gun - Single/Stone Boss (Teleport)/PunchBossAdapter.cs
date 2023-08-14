@@ -24,6 +24,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[ReadOnly] public float bossHp;
 		[ReadOnly] public int bossCurrentStage = 1;
 
+		[FoldoutGroup("Event")] public UnityEvent enableHalfHealth;
 		[FoldoutGroup("Event")] public UnityEvent enableSecondStage;
 		[FoldoutGroup("Event")] public UnityEvent enableThirdStage;
 		[FoldoutGroup("Event")] public UnityEvent enableBossDead;
@@ -54,6 +55,9 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 
 		private void DamageBoss(float damageAmount = 7.5f){
 			bossHp -= damageAmount;
+			if(bossHp < 50 && bossCurrentStage == 1){
+				enableHalfHealth?.Invoke();
+			}
 			UpdateHpBar();
 			if(bossHp > 0) return;
 			bossCurrentStage += 1;
