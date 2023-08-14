@@ -39,7 +39,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		}
 
 		private void Teleport(Vector3 teleportPosition){
-			teleportPosition.y += 1;
+			teleportPosition.y += 2;
 			playerTransform.DOMove(teleportPosition, teleportDuration)
 					.SetEase(Ease.OutCubic);
 		}

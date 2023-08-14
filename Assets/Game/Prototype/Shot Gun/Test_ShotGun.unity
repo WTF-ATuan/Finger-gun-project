@@ -6432,7 +6432,7 @@ GameObject:
   - component: {fileID: 1961718214}
   - component: {fileID: 1961718213}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Ammo UI Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13773,6 +13773,7 @@ MonoBehaviour:
   reloadClip: {fileID: 8300000, guid: 9589218ea096de346976f29d0efd854f, type: 3}
   fireVFX: {fileID: 4834526503407549940, guid: 2735bebe54c1f5a4096f5134a96f7e77, type: 3}
   ammoCountText: {fileID: 865101280}
+  isRight: 1
 --- !u!114 &3587543701787630741
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,11 +17,19 @@ namespace Game.Prototype.Pistol{
 		[TitleGroup("Setting")] [SerializeField]
 		private Transform[] muzzles;
 
+		[TitleGroup("Setting")] [SerializeField]
+		private bool isRight = true;
+
+		[TitleGroup("Setting")] [SerializeField]
+		private Vector2 reloadAngleRange = new(40, 70);
+
+
 		[TitleGroup("View")] [SerializeField] private AudioClip fireClip;
 		[TitleGroup("View")] [SerializeField] private AudioClip emptyClip;
 		[TitleGroup("View")] [SerializeField] private AudioClip reloadClip;
 		[TitleGroup("View")] [SerializeField] private GameObject fireVFX;
 		[TitleGroup("View")] [SerializeField] private TMP_Text ammoCountText;
+		[TitleGroup("View")] [SerializeField] private Vector3 reloadingRotateDirection = Vector3.forward;
 
 
 		private PistolRecoil _recoil;
@@ -37,12 +45,15 @@ namespace Game.Prototype.Pistol{
 
 		private void Update(){
 			var openingFire =
-					OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger);
+					OVRInput.GetDown(isRight
+							? OVRInput.Button.SecondaryIndexTrigger
+							: OVRInput.Button.PrimaryIndexTrigger);
 			if(openingFire){
 				Fire();
 			}
 
-			if(transform.eulerAngles.z is > 40 and < 70 && _currentAmmo < ammoMax){
+			if(transform.eulerAngles.z > reloadAngleRange.x && transform.eulerAngles.z < reloadAngleRange.y &&
+			   _currentAmmo < ammoMax){
 				Reload();
 			}
 		}
@@ -52,7 +63,8 @@ namespace Game.Prototype.Pistol{
 				_audioPlayer.PlayOneShot(emptyClip);
 				return;
 			}
-
+			// 換彈中不能射擊
+			if(!_recoil.enabled) return;
 			ModifyCurrentAmmo(_currentAmmo - 1);
 			foreach(var muzzle in muzzles){
 				var bullet = Instantiate(projectile, muzzle.position, muzzle.rotation);
@@ -68,13 +80,19 @@ namespace Game.Prototype.Pistol{
 
 		[Button]
 		private void Reload(){
-			ModifyCurrentAmmo(ammoMax);
 			_recoil.enabled = false;
 			var targetAngle = transform.eulerAngles;
-			targetAngle.z += 360;
-			transform.DORotate(targetAngle, 0.3f, RotateMode.FastBeyond360)
+			targetAngle += reloadingRotateDirection * 360;
+			var calculateReloadingTime = CalculateReloadingTime();
+			ModifyCurrentAmmo(ammoMax);
+			transform.DORotate(targetAngle, calculateReloadingTime, RotateMode.FastBeyond360)
 					.OnComplete(() => { _recoil.enabled = true; });
 			_audioPlayer.PlayOneShot(reloadClip);
+		}
+
+		private float CalculateReloadingTime(){
+			var ammoPercent = Mathf.Clamp01((float)_currentAmmo / ammoMax);
+			return ammoPercent > 0.8f ? 0.2f : Mathf.Lerp(0.75f, 0.2f, ammoPercent);
 		}
 
 		private void ModifyCurrentAmmo(int amount){
@@ -83,12 +101,13 @@ namespace Game.Prototype.Pistol{
 		}
 
 		private void SimpleHaptic(){
-			OVRInput.SetControllerVibration(500, 0.9f, OVRInput.Controller.RTouch);
+			OVRInput.SetControllerVibration(500, 0.9f,
+				isRight ? OVRInput.Controller.RTouch : OVRInput.Controller.LTouch);
 			Invoke(nameof(StopHaptic), 0.2f);
 		}
 
 		private void StopHaptic(){
-			OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+			OVRInput.SetControllerVibration(0, 0, isRight ? OVRInput.Controller.RTouch : OVRInput.Controller.LTouch);
 		}
 
 		private void OnDrawGizmos(){
