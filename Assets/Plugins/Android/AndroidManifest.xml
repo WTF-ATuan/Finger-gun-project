@@ -7,6 +7,15 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.Atuan.StoneBossTest.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+      <meta-data
+              android:name="android.support.FILE_PROVIDER_PATHS"
+              android:resource="@xml/provider_paths"/>
+    </provider>
     <meta-data android:name="unityplayer.SkipPermissionsDialog" android:value="false" />
     <meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only" />
     <meta-data android:name="com.oculus.handtracking.frequency" android:value="LOW" />

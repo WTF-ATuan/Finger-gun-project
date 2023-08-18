@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Game.Prototype.Project_Update{
@@ -16,7 +17,7 @@ namespace Game.Prototype.Project_Update{
 		private void Start(){
 			StartCoroutine(WebSeverAdapter.GetReleaseInfo(GithubApiUrl, CheckReleaseVersion));
 		}
-
+		[Button]
 		public void DownloadNewVersion(){
 			StartCoroutine(WebSeverAdapter.DownloadAPK(_infoTemp.apk_url, _infoTemp.tag_name, InstallNewVersion));
 		}

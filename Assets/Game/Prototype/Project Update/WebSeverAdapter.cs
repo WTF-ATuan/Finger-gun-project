@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -39,20 +40,65 @@ namespace Game.Prototype.Project_Update{
 			}
 		}
 
-		public static void InstallNewAPK(string apkFilePath){
-			var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-			var currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-			var intentClass = new AndroidJavaClass("android.content.Intent");
-			var intent = new AndroidJavaObject("android.content.Intent", intentClass.GetStatic<string>("ACTION_VIEW"));
-			var file = new AndroidJavaObject("java.io.File", apkFilePath);
-			var uriClass = new AndroidJavaClass("android.net.Uri");
-			var uri = uriClass.CallStatic<AndroidJavaObject>("fromFile", file);
-			var mimeType = new AndroidJavaObject("java.lang.String", "application/vnd.android.package-archive");
+		// public static void InstallNewAPK(string apkFilePath){
+		// 	try{
+		// 		var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+		// 		var currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+		// 		var intentClass = new AndroidJavaClass("android.content.Intent");
+		// 		var intent = new AndroidJavaObject("android.content.Intent", intentClass.GetStatic<string>("ACTION_VIEW"));
+		// 		var file = new AndroidJavaObject("java.io.File", apkFilePath);
+		// 		var uriClass = new AndroidJavaClass("android.net.Uri");
+		// 		var uri = uriClass.CallStatic<AndroidJavaObject>("fromFile", file);
+		// 		var mimeType = new AndroidJavaObject("java.lang.String", "application/vnd.android.package-archive");
+		//
+		// 		intent.Call<AndroidJavaObject>("setDataAndType", uri, mimeType);
+		// 		intent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK"));
+		// 		currentActivity.Call("startActivity", intent);
+		// 		GameObject.Find("TextDebug").GetComponent<TMP_Text>().text = "Success";
+		// 	}
+		// 	catch(Exception exception){
+		// 		GameObject.Find("TextDebug").GetComponent<TMP_Text>().text = "Error: " + exception.Message;
+		// 		throw;
+		// 	}
+		// }
 
-			intent.Call<AndroidJavaObject>("setDataAndType", uri, mimeType);
-			intent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK"));
-
-			currentActivity.Call("startActivity", intent);
+		public static void InstallNewAPK(string apkPath){
+			try{
+				//Get Activity then Context
+				var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+				var currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+				var unityContext = currentActivity.Call<AndroidJavaObject>("getApplicationContext");
+		
+				//Get the package Name
+				var packageName = unityContext.Call<string>("getPackageName");
+				var authority = packageName + ".fileprovider";
+		
+				var intentObj = new AndroidJavaClass("android.content.Intent");
+				var actionView = intentObj.GetStatic<string>("ACTION_VIEW");
+				var intent = new AndroidJavaObject("android.content.Intent", actionView);
+		
+		
+				var flagActivityNewTask = intentObj.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK");
+				var flagGrantReadUriPermission = intentObj.GetStatic<int>("FLAG_GRANT_READ_URI_PERMISSION");
+		
+				//File fileObj = new File(String pathname);
+				var fileObj = new AndroidJavaObject("java.io.File", apkPath);
+				//FileProvider object that will be used to call it static function
+				var fileProvider = new AndroidJavaClass("android.support.v4.content.FileProvider");
+				//getUriForFile(Context context, String authority, File file)
+				var uri = fileProvider.CallStatic<AndroidJavaObject>("getUriForFile", unityContext, authority, fileObj);
+		
+				intent.Call<AndroidJavaObject>("setDataAndType", uri, "application/vnd.android.package-archive");
+				intent.Call<AndroidJavaObject>("addFlags", flagActivityNewTask);
+				intent.Call<AndroidJavaObject>("addFlags", flagGrantReadUriPermission);
+				currentActivity.Call("startActivity", intent);
+				GameObject.Find("TextDebug").GetComponent<TMP_Text>().text = "Success";
+			}
+			catch(Exception exception){
+				GameObject.Find("TextDebug").GetComponent<TMP_Text>().text = "Error: " + exception.Message;
+				throw;
+			}
+			
 		}
 
 		public static void ActiveApp(string packageName){
