@@ -3,12 +3,13 @@ using UnityEngine.Events;
 
 namespace Game.Prototype.Project_Update{
 	public class ProjectUpdater : MonoBehaviour{
-		private const string
-				GithubApiUrl =
-						"https://api.github.com/repos/WTF-ATuan/Finger-gun-project/releases/latest";
+		private const string GithubApiUrl = "https://api.github.com/repos/WTF-ATuan/Finger-gun-project/releases/latest";
+
+		private const string PackageName = "com.Atuan.StoneBossTest";
 
 		public string releaseTag = "Testing Stone Boss V0.9";
 		public UnityEvent onNewVersion;
+		public UnityEvent onDownloadFinish;
 		private ReleaseInfo _infoTemp;
 
 		private void Start(){
@@ -30,7 +31,9 @@ namespace Game.Prototype.Project_Update{
 		}
 
 		private void InstallNewVersion(string apkPath){
+			onDownloadFinish?.Invoke();
 			WebSeverAdapter.InstallNewAPK(apkPath);
+			WebSeverAdapter.ActiveApp(PackageName);
 		}
 	}
 }

@@ -54,5 +54,24 @@ namespace Game.Prototype.Project_Update{
 
 			currentActivity.Call("startActivity", intent);
 		}
+
+		public static void ActiveApp(string packageName){
+			var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+			var currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+			var packageManager = currentActivity.Call<AndroidJavaObject>("getPackageManager");
+
+			try{
+				var launchIntent = packageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage", packageName);
+				if(launchIntent != null){
+					currentActivity.Call("startActivity", launchIntent);
+				}
+				else{
+					Debug.LogError("App not found or cannot be launched.");
+				}
+			}
+			catch(Exception exception){
+				Debug.LogError("Error starting app: " + exception.ToString());
+			}
+		}
 	}
 }
