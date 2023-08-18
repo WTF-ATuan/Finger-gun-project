@@ -36,19 +36,21 @@ namespace Game.Prototype.Project_Update{
 				var savePath = Application.persistentDataPath + $"/{apkName}.apk";
 				File.WriteAllBytes(savePath, apkData);
 				result?.Invoke(savePath);
-				Debug.Log($"APK downloaded successfully! , {savePath}");
 			}
 		}
 
 		public static void InstallNewAPK(string apkFilePath){
 			var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 			var currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-			var intent = new AndroidJavaObject("android.content.Intent", "android.intent.action.VIEW");
+			var intentClass = new AndroidJavaClass("android.content.Intent");
+			var intent = new AndroidJavaObject("android.content.Intent", intentClass.GetStatic<string>("ACTION_VIEW"));
 			var file = new AndroidJavaObject("java.io.File", apkFilePath);
-			var uri = AndroidJavaObject.CallStatic<AndroidJavaObject>("fromFile", file);
-			const string mimeType = "application/vnd.android.package-archive";
+			var uriClass = new AndroidJavaClass("android.net.Uri");
+			var uri = uriClass.CallStatic<AndroidJavaObject>("fromFile", file);
+			var mimeType = new AndroidJavaObject("java.lang.String", "application/vnd.android.package-archive");
+
 			intent.Call<AndroidJavaObject>("setDataAndType", uri, mimeType);
-			intent.Call<AndroidJavaObject>("addFlags", 1 /* Intent.FLAG_ACTIVITY_NEW_TASK */);
+			intent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK"));
 
 			currentActivity.Call("startActivity", intent);
 		}

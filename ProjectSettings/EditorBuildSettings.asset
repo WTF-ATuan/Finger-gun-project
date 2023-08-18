@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Prototype/Quick Gun - Single/Inferno Dragon Boss/Inferno Dragon
-      Boss.unity
-    guid: 6a7c8b7acc6f2f047b83346795b5782e
+    path: Assets/Game/Prototype/Project Update/Test_scene_StartMenu.unity
+    guid: 95c3bdd87f2e55141b52a7fb07534e37
+  - enabled: 1
+    path: Assets/Game/Prototype/Quick Gun - Single/Stone Boss (Teleport)/Test_scene_Stone
+      Boss Fight.unity
+    guid: 1c4f3ee8e2dafda4d876dd3ffb96a8bd
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f018f6f8cb600354cafca062d283415b, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: bd92319936cde324d9b10990fb5cd865, type: 2}
