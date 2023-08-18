@@ -8,7 +8,8 @@ namespace Game.Prototype.Project_Update{
 		private const string PackageName = "com.Atuan.StoneBossTest";
 
 		public string releaseTag = "Testing Stone Boss V0.9";
-		public UnityEvent onNewVersion;
+		public UnityEvent<string> onNewVersion;
+		public UnityEvent<string> onDetectNewVersion;
 		public UnityEvent onDownloadFinish;
 		private ReleaseInfo _infoTemp;
 
@@ -22,12 +23,13 @@ namespace Game.Prototype.Project_Update{
 
 		private void CheckReleaseVersion(ReleaseInfo result){
 			if(result.tag_name != releaseTag){
-				onNewVersion?.Invoke();
+				onNewVersion?.Invoke(result.tag_name);
 				_infoTemp = result;
 			}
 			else{
 				Debug.Log("Your version is newest");
 			}
+			onDetectNewVersion?.Invoke(releaseTag);
 		}
 
 		private void InstallNewVersion(string apkPath){
