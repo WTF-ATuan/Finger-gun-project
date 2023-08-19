@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45160268c3f4ebdaf5d12a448f3f3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  releaseTag: 0.5.6
+  releaseTag: 0.5.8
   onNewVersion:
     m_PersistentCalls:
       m_Calls:

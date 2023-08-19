@@ -45,15 +45,24 @@ namespace Game.Prototype.Project_Update{
 				var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 				var currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 				var intentClass = new AndroidJavaClass("android.content.Intent");
-				var intent = new AndroidJavaObject("android.content.Intent", intentClass.GetStatic<string>("ACTION_VIEW"));
+				var intent = new AndroidJavaObject("android.content.Intent",
+					intentClass.GetStatic<string>("ACTION_VIEW"));
+
+				// 获取 FileProvider 的 URI
 				var file = new AndroidJavaObject("java.io.File", apkFilePath);
-				var uriClass = new AndroidJavaClass("android.net.Uri");
-				var uri = uriClass.CallStatic<AndroidJavaObject>("fromFile", file);
+				var unityContext = currentActivity.Call<AndroidJavaObject>("getApplicationContext");
+				var packageName = unityContext.Call<string>("getPackageName");
+				var fileProvider = new AndroidJavaClass("androidx.core.content.FileProvider");
+				var uri = fileProvider.CallStatic<AndroidJavaObject>("getUriForFile", unityContext,
+					packageName + ".fileprovider", file);
+
 				var mimeType = new AndroidJavaObject("java.lang.String", "application/vnd.android.package-archive");
-		
 				intent.Call<AndroidJavaObject>("setDataAndType", uri, mimeType);
 				intent.Call<AndroidJavaObject>("addFlags", intentClass.GetStatic<int>("FLAG_ACTIVITY_NEW_TASK"));
+				intent.Call<AndroidJavaObject>("addFlags",
+					intentClass.GetStatic<int>("FLAG_GRANT_READ_URI_PERMISSION")); // 授予读取 URI 的权限
 				currentActivity.Call("startActivity", intent);
+
 				GameObject.Find("TextDebug").GetComponent<TMP_Text>().text = "Success";
 			}
 			catch(Exception exception){
@@ -61,7 +70,7 @@ namespace Game.Prototype.Project_Update{
 				throw;
 			}
 		}
-		
+
 		public static void ActiveApp(string packageName){
 			var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 			var currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
