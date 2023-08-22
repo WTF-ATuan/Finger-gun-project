@@ -19,7 +19,7 @@ namespace Game.Prototype.Project_Update{
 		}
 		[Button]
 		public void DownloadNewVersion(){
-			StartCoroutine(WebSeverAdapter.DownloadAPK(_infoTemp.apk_url, _infoTemp.tag_name, InstallNewVersion));
+			StartCoroutine(WebSeverAdapter.DownloadAPK(_infoTemp.apk_url, _infoTemp.tag_name, DownloadComplete));
 		}
 
 		private void CheckReleaseVersion(ReleaseInfo result){
@@ -33,10 +33,8 @@ namespace Game.Prototype.Project_Update{
 			onDetectNewVersion?.Invoke(releaseTag);
 		}
 
-		private void InstallNewVersion(string apkPath){
+		private void DownloadComplete(string apkPath){
 			onDownloadFinish?.Invoke();
-			WebSeverAdapter.InstallNewAPK(apkPath);
-			WebSeverAdapter.ActiveApp(PackageName);
 		}
 	}
 }
