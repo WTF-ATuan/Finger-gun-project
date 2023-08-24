@@ -38,7 +38,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			}
 
 			if(obj.CompareTag("Concrete")){
-				_currentHp -= 45;
+				_currentHp -= 25;
 			}
 
 			if(_currentHp <= 0) onPlayerDead?.Invoke();

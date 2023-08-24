@@ -1,10 +1,8 @@
-﻿using System;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
@@ -58,6 +56,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			if(bossHp < 50 && bossCurrentStage == 1){
 				enableHalfHealth?.Invoke();
 			}
+
 			UpdateHpBar();
 			if(bossHp > 0) return;
 			bossCurrentStage += 1;
@@ -99,6 +98,20 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			hitCount = 0;
 		}
 
+		private bool _preAttackInRange;
+
+		public void PreAttackCheck(){
+			_preAttackInRange = detectTrigger.bounds.Contains(player.position);
+		}
+
+		public void PostAttackCheck(){
+			if(_preAttackInRange && !detectTrigger.bounds.Contains(player.position)){
+				EventAggregator.Publish(new DodgeAction());
+			}
+		}
+
 		#endregion
 	}
+
+	public class DodgeAction{ }
 }

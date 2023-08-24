@@ -12,7 +12,7 @@ namespace Game.Prototype.Pistol{
 		private float projectileImpulse = 300;
 
 		[TitleGroup("Setting")] [SerializeField]
-		private int ammoMax = 3;
+		public int ammoMax = 3;
 
 		[TitleGroup("Setting")] [SerializeField]
 		private Transform[] muzzles;
@@ -42,7 +42,6 @@ namespace Game.Prototype.Pistol{
 			_audioPlayer = gameObject.AddComponent<AudioSource>();
 			ModifyCurrentAmmo(ammoMax);
 		}
-
 		private void Update(){
 			var openingFire =
 					OVRInput.GetDown(isRight
@@ -95,7 +94,7 @@ namespace Game.Prototype.Pistol{
 			return ammoPercent > 0.8f ? 0.2f : Mathf.Lerp(0.75f, 0.2f, ammoPercent);
 		}
 
-		private void ModifyCurrentAmmo(int amount){
+		public void ModifyCurrentAmmo(int amount){
 			_currentAmmo = Mathf.Clamp(amount, 0, ammoMax);
 			ammoCountText.text = _currentAmmo.ToString();
 		}
