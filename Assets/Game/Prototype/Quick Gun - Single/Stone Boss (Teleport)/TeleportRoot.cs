@@ -11,6 +11,8 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 	public class TeleportRoot : MonoBehaviour{
 		public Transform[] teleportTriggers = new Transform[4];
 		[Required] public Transform playerTransform;
+		[Required] public Transform bossTransform;
+		public bool autoRotate = true;
 		public float teleportDuration = 0.5f;
 
 		private void Start(){
@@ -42,6 +44,10 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			teleportPosition.y += 2;
 			playerTransform.DOMove(teleportPosition, teleportDuration)
 					.SetEase(Ease.OutCubic);
+			if(autoRotate){
+				playerTransform.DOLookAt(bossTransform.position, teleportDuration, AxisConstraint.Y)
+						.SetEase(Ease.OutCubic);
+			}
 		}
 
 		[Button]
