@@ -24,5 +24,9 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		public void SceneReload(){
 			SceneManager.LoadScene(0);
 		}
+
+		public void LoadPlayScene(){
+			SceneManager.LoadScene(1);
+		}
 	}
 }
