@@ -395,6 +395,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 4774483063481045439}
     m_Position: {x: 1175, y: 595, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -314118892915611595}
+    m_Position: {x: 1210, y: 660, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 8631466122832264328}
@@ -408,6 +411,32 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 580, y: 220, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 6170524565915390684}
+--- !u!1102 &-314118892915611595
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ani_stone_boss_start
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 4f42a7b653e52de43b975397a2bccd8d, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-41902637872665828
 AnimatorState:
   serializedVersion: 6

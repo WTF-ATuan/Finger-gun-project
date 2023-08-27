@@ -29,7 +29,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -58,9 +58,9 @@ Material:
     - _Cull: 2
     - _DstBlend: 10
     - _Fullscreenintensity: 0.5
-    - _NoiseScale: 1.31
-    - _NoiseSpeed: 19.1
-    - _NoiseStrength: 0
+    - _NoiseScale: 0.5
+    - _NoiseSpeed: 0.22
+    - _NoiseStrength: 2
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
@@ -73,4 +73,5 @@ Material:
     m_Colors:
     - _FullscreenColor: {r: 0.8490566, g: 0.35644358, b: 0.35644358, a: 0}
     - _RippleCenter: {r: 0, g: 0, b: 0, a: 0}
+    - _TexSmooth: {r: 0.32, g: 2.57, b: 0, a: 0}
   m_BuildTextureStacks: []
