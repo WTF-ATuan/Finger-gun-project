@@ -1,8 +1,10 @@
-﻿using Sirenix.OdinInspector;
+﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
@@ -12,8 +14,8 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[Required] [BoxGroup("Basic")] public float bossStartHp = 100;
 		[Required] [BoxGroup("Basic")] public float bossTurningDuration = 5;
 
-		[BoxGroup("Weakness")] public BoxCollider weaknessFront;
-		[BoxGroup("Weakness")] public BoxCollider weaknessBack;
+		[BoxGroup("Weakness")] public Collider weaknessCore;
+		[BoxGroup("Weakness")] public List<Collider> amplifiers;
 		[BoxGroup("Weakness")] public GameObject weaknessHitVFX;
 
 		[BoxGroup("Health")] public Image hpBar;
@@ -28,8 +30,9 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[FoldoutGroup("Event")] public UnityEvent enableBossDead;
 
 		private void Start(){
-			weaknessFront.OnCollisionEnterAsObservable().Subscribe(OnWeaknessHit);
-			weaknessBack.OnCollisionEnterAsObservable().Subscribe(OnWeaknessHit);
+			weaknessCore.OnCollisionEnterAsObservable().Subscribe(OnWeaknessCoreHit);
+			amplifiers.ForEach(x =>
+					x.OnCollisionEnterAsObservable().Subscribe(collision => OnAmplifierHit(collision, x)));
 			bossCurrentStage = 1;
 			bossHp = bossStartHp;
 		}
@@ -40,7 +43,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			DamageBoss(amount);
 		}
 
-		private void OnWeaknessHit(Collision obj){
+		private void OnWeaknessCoreHit(Collision obj){
 			if(!obj.gameObject.TryGetComponent<Projectile>(out var projectile)){
 				return;
 			}
@@ -50,6 +53,8 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			Destroy(vfxClone, 0.35f);
 			DamageBoss();
 		}
+
+		private void OnAmplifierHit(Collision obj, Collider amplifier){ }
 
 		private void DamageBoss(float damageAmount = 7.5f){
 			bossHp -= damageAmount;
