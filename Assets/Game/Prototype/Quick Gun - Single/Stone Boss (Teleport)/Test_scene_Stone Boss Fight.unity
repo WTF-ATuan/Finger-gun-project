@@ -17404,14 +17404,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260197209}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.25, z: -13.75}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: -1.5, z: -13.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2146565850}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!1001 &269410509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67593,7 +67593,7 @@ RectTransform:
   - {fileID: 755820882}
   - {fileID: 1663897036}
   m_Father: {fileID: 2146565850}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -89999,7 +89999,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh98722
+  m_Name: pb_Mesh271800
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -100648,6 +100648,7 @@ MonoBehaviour:
   detectTrigger: {fileID: 1463598476}
   bossStartHp: 100
   bossTurningDuration: 5
+  specialActionTrigger: {fileID: 0}
   weaknessCore: {fileID: 0}
   amplifiers: []
   healthDuration: 0
@@ -113619,6 +113620,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916224303}
   m_CullTransparentMesh: 1
+--- !u!1 &1920775125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1920775126}
+  - component: {fileID: 1920775127}
+  m_Layer: 0
+  m_Name: Special Attack Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1920775126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920775125}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: -1, z: -13.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2146565850}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+--- !u!65 &1920775127
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920775125}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4, z: 8}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1923760282
 GameObject:
   m_ObjectHideFlags: 0
@@ -129955,7 +130001,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2146565849}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -18, z: 15}
+  m_LocalPosition: {x: 0, y: 4.5, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -129963,6 +130009,7 @@ Transform:
   - {fileID: 316339229}
   - {fileID: 150792900}
   - {fileID: 260197211}
+  - {fileID: 1920775126}
   - {fileID: 980583140}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -130003,6 +130050,7 @@ MonoBehaviour:
   detectTrigger: {fileID: 260197210}
   bossStartHp: 100
   bossTurningDuration: 5
+  specialActionTrigger: {fileID: 1920775127}
   weaknessCore: {fileID: 2246373338237896328}
   amplifiers:
   - {fileID: 2246373338237896327}

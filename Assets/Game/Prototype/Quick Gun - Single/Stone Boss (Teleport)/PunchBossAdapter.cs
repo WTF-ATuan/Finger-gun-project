@@ -14,6 +14,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[Required] [BoxGroup("Basic")] public Collider detectTrigger;
 		[Required] [BoxGroup("Basic")] public float bossStartHp = 100;
 		[Required] [BoxGroup("Basic")] public float bossTurningDuration = 5;
+		[Required] [BoxGroup("Basic")] public Collider specialActionTrigger;
 
 		[BoxGroup("Weakness")] public Collider weaknessCore;
 		[BoxGroup("Weakness")] public List<Collider> amplifiers;
@@ -30,6 +31,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[FoldoutGroup("Event")] public UnityEvent enableBossDead;
 
 		private ColdDownTimer _timer;
+		private Animator _animator;
 
 		private void Start(){
 			weaknessCore.OnCollisionEnterAsObservable().Subscribe(OnWeaknessCoreHit);
@@ -38,6 +40,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			bossCurrentStage = 1;
 			bossHp = bossStartHp;
 			_timer = new ColdDownTimer(healthDuration);
+			_animator = GetComponent<Animator>();
 		}
 
 		[Button]
@@ -81,14 +84,15 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			bossCurrentStage += 1;
 			switch(bossCurrentStage){
 				case 2:
+					_animator.SetTrigger($"Next");
 					enableSecondStage?.Invoke();
 					hpBar.color = Color.yellow;
 					break;
 				case 3:
+					_animator.SetTrigger($"Dead");
 					enableBossDead?.Invoke();
 					return;
 			}
-
 			bossHp = bossStartHp;
 			UpdateHpBar();
 		}
@@ -129,6 +133,11 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			if(_preAttackInRange && !detectTrigger.bounds.Contains(player.position)){
 				EventAggregator.Publish(new DodgeAction());
 			}
+		}
+
+		public void SpecialActionCondition(){
+			var playerInRange = specialActionTrigger.bounds.Contains(player.position);
+			
 		}
 
 		#endregion

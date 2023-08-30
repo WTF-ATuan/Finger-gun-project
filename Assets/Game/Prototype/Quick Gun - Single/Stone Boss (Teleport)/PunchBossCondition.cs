@@ -13,15 +13,13 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		private int _hitCount;
 		private static readonly int Hard = Animator.StringToHash("Hard");
 		private static readonly int Light = Animator.StringToHash("Light");
-
-
+		
 		public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo,
 			int layerIndex){
 			_animator = animator;
 			_adapter = animator.GetComponent<PunchBossAdapter>();
 			_player = _adapter.player;
 			_detectTrigger = _adapter.detectTrigger;
-			Debug.Log($"{PlayerInRange()}");
 			if(!PlayerInRange()){
 				TurnToPlayer();
 			}
