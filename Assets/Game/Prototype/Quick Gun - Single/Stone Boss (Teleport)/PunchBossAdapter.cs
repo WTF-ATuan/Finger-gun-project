@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Game.Project;
 using Sirenix.OdinInspector;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
@@ -16,6 +17,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 
 		[BoxGroup("Weakness")] public Collider weaknessCore;
 		[BoxGroup("Weakness")] public List<Collider> amplifiers;
+		[BoxGroup("Weakness")] public float healthDuration = 2;
 		[BoxGroup("Weakness")] public GameObject weaknessHitVFX;
 
 		[BoxGroup("Health")] public Image hpBar;
@@ -24,10 +26,10 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[ReadOnly] public float bossHp;
 		[ReadOnly] public int bossCurrentStage = 1;
 
-		[FoldoutGroup("Event")] public UnityEvent enableHalfHealth;
 		[FoldoutGroup("Event")] public UnityEvent enableSecondStage;
-		[FoldoutGroup("Event")] public UnityEvent enableThirdStage;
 		[FoldoutGroup("Event")] public UnityEvent enableBossDead;
+
+		private ColdDownTimer _timer;
 
 		private void Start(){
 			weaknessCore.OnCollisionEnterAsObservable().Subscribe(OnWeaknessCoreHit);
@@ -35,6 +37,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 					x.OnCollisionEnterAsObservable().Subscribe(collision => OnAmplifierHit(collision, x)));
 			bossCurrentStage = 1;
 			bossHp = bossStartHp;
+			_timer = new ColdDownTimer(healthDuration);
 		}
 
 		[Button]
@@ -54,14 +57,27 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			DamageBoss();
 		}
 
-		private void OnAmplifierHit(Collision obj, Collider amplifier){ }
-
-		private void DamageBoss(float damageAmount = 7.5f){
-			bossHp -= damageAmount;
-			if(bossHp < 50 && bossCurrentStage == 1){
-				enableHalfHealth?.Invoke();
+		private void OnAmplifierHit(Collision obj, Collider amplifier){
+			if(!obj.gameObject.TryGetComponent<Projectile>(out var projectile)){
+				return;
 			}
 
+			var vfxClone = Instantiate(weaknessHitVFX, obj.GetContact(0).point,
+				Quaternion.Euler(obj.GetContact(0).normal));
+			Destroy(vfxClone, 0.35f);
+			amplifier.gameObject.SetActive(false);
+		}
+
+		private void ReHealthBoss(){
+			var activeAmplifierCount = amplifiers.Select(x => x.gameObject.activeSelf).Count();
+			Debug.Log($"bossHp = {bossHp}");
+			bossHp = Mathf.Clamp(bossHp + activeAmplifierCount * 2, 0, bossStartHp);
+			Debug.Log($"bossHp = {bossHp}");
+			UpdateHpBar();
+		}
+
+		private void DamageBoss(float damageAmount = 7.5f){
+			bossHp = Mathf.Clamp(bossHp - damageAmount, 0, bossStartHp);
 			UpdateHpBar();
 			if(bossHp > 0) return;
 			bossCurrentStage += 1;
@@ -71,10 +87,6 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 					hpBar.color = Color.yellow;
 					break;
 				case 3:
-					enableThirdStage?.Invoke();
-					hpBar.color = Color.red;
-					break;
-				case 4:
 					enableBossDead?.Invoke();
 					return;
 			}
@@ -91,6 +103,12 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 
 		public void ModifyTurnDuration(float duration){
 			bossTurningDuration = duration;
+		}
+
+		private void FixedUpdate(){
+			if(!_timer.CanInvoke()) return;
+			ReHealthBoss();
+			_timer.Reset();
 		}
 
 		#region Trigger_By_Animation

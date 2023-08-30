@@ -17392,7 +17392,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260197209}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4, y: 4, z: 8}
@@ -60508,7 +60508,7 @@ MeshCollider:
   m_GameObject: {fileID: 787914216}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -90000,7 +90000,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh92224
+  m_Name: pb_Mesh33786
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -100651,14 +100651,12 @@ MonoBehaviour:
   bossTurningDuration: 5
   weaknessCore: {fileID: 0}
   amplifiers: []
+  healthDuration: 0
   weaknessHitVFX: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c, type: 3}
   hpBar: {fileID: 1832197606}
   hitCount: 0
   bossHp: 60
   bossCurrentStage: 2
-  enableHalfHealth:
-    m_PersistentCalls:
-      m_Calls: []
   enableSecondStage:
     m_PersistentCalls:
       m_Calls:
@@ -100696,46 +100694,6 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 3.5
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  enableThirdStage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1542502294}
-        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
-        m_MethodName: set_material
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 5df8b862b7e8645478e42ba7547fc869, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1542502297}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_speed
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 2
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1542502298}
-        m_TargetAssemblyTypeName: Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_.PunchBossAdapter,
-          Assembly-CSharp
-        m_MethodName: ModifyTurnDuration
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -129853,7 +129811,7 @@ GameObject:
   - component: {fileID: 2146565852}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129921,18 +129879,13 @@ MonoBehaviour:
   - {fileID: 2246373338237896325}
   - {fileID: 2246373338237896324}
   - {fileID: 54317454}
+  healthDuration: 1
   weaknessHitVFX: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c, type: 3}
   hpBar: {fileID: 146491073}
   hitCount: 0
   bossHp: 0
   bossCurrentStage: 1
-  enableHalfHealth:
-    m_PersistentCalls:
-      m_Calls: []
   enableSecondStage:
-    m_PersistentCalls:
-      m_Calls: []
-  enableThirdStage:
     m_PersistentCalls:
       m_Calls: []
   enableBossDead:
@@ -130458,6 +130411,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2146565850}
     m_Modifications:
+    - target: {fileID: 386079841921946678, guid: a47805622695e31479b62b984e26c4c5, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
     - target: {fileID: 1436034169504037313, guid: a47805622695e31479b62b984e26c4c5, type: 3}
       propertyPath: m_Name
       value: stone_boss_body
@@ -130505,6 +130462,26 @@ PrefabInstance:
     - target: {fileID: 1776109144834319227, guid: a47805622695e31479b62b984e26c4c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273770059246515552, guid: a47805622695e31479b62b984e26c4c5, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2893055027801436427, guid: a47805622695e31479b62b984e26c4c5, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883575041790636868, guid: a47805622695e31479b62b984e26c4c5, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250755340169944848, guid: a47805622695e31479b62b984e26c4c5, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281136598700885983, guid: a47805622695e31479b62b984e26c4c5, type: 3}
+      propertyPath: m_TagString
+      value: Metal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a47805622695e31479b62b984e26c4c5, type: 3}
