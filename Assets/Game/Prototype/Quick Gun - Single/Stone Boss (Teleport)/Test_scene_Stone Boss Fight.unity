@@ -16669,11 +16669,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4517080131129284306, guid: 65bbdc6526a45844bb68fc61c23c25f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.197548
+      value: 23.447548
       objectReference: {fileID: 0}
     - target: {fileID: 4517080131129284306, guid: 65bbdc6526a45844bb68fc61c23c25f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.0704
+      value: -17.570402
       objectReference: {fileID: 0}
     - target: {fileID: 4517080131129284306, guid: 65bbdc6526a45844bb68fc61c23c25f6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17404,14 +17404,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260197209}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.25, z: -13.75}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: -1, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2146565850}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!1001 &269410509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129955,7 +129955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2146565849}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.5, z: 15}
+  m_LocalPosition: {x: 0, y: -18, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -130018,7 +130018,32 @@ MonoBehaviour:
   bossCurrentStage: 1
   enableSecondStage:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2146565851}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: set_speed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1.5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2146565852}
+        m_TargetAssemblyTypeName: Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_.PunchBossAdapter,
+          Assembly-CSharp
+        m_MethodName: ModifyTurnDuration
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 3.5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   enableBossDead:
     m_PersistentCalls:
       m_Calls: []
