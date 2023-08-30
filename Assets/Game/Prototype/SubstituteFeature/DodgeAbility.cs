@@ -15,7 +15,7 @@ namespace Game.Prototype.SubstituteFeature{
 
 		private void Start(){
 			EventAggregator.OnEvent<DodgeAction>().Subscribe(OnDodge);
-			_audioSource = gameObject.AddComponent<AudioSource>();
+			_audioSource = gameObject.GetComponent<AudioSource>();
 		}
 
 		private void OnDodge(DodgeAction obj){

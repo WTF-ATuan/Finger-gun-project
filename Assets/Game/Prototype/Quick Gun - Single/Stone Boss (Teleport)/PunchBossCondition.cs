@@ -21,6 +21,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			_adapter = animator.GetComponent<PunchBossAdapter>();
 			_player = _adapter.player;
 			_detectTrigger = _adapter.detectTrigger;
+			Debug.Log($"{PlayerInRange()}");
 			if(!PlayerInRange()){
 				TurnToPlayer();
 			}

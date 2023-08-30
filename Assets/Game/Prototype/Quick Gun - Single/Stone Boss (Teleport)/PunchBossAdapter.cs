@@ -69,10 +69,8 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		}
 
 		private void ReHealthBoss(){
-			var activeAmplifierCount = amplifiers.Select(x => x.gameObject.activeSelf).Count();
-			Debug.Log($"bossHp = {bossHp}");
+			var activeAmplifierCount = amplifiers.FindAll(x => x.gameObject.activeSelf).Count;
 			bossHp = Mathf.Clamp(bossHp + activeAmplifierCount * 2, 0, bossStartHp);
-			Debug.Log($"bossHp = {bossHp}");
 			UpdateHpBar();
 		}
 
