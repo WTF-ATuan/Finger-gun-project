@@ -65,7 +65,7 @@ Material:
     - _DstBlend: 10
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 5
+    - _Speed: 6
     - _SrcBlend: 5
     - _Surface: 1
     - _TextureLight: 5
@@ -74,5 +74,5 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _Color: {r: 8, g: 8, b: 8, a: 0}
-    - _TextureTiling: {r: 4, g: 1, b: 0, a: 0}
+    - _TextureTiling: {r: 1.5, g: 1.5, b: 0, a: 0}
   m_BuildTextureStacks: []
