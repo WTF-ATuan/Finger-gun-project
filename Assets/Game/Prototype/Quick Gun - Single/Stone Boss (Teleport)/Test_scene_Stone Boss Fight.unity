@@ -100976,7 +100976,6 @@ MonoBehaviour:
   detectTrigger: {fileID: 1463598476}
   bossStartHp: 100
   bossTurningDuration: 5
-  specialActionTrigger: {fileID: 0}
   weaknessCore: {fileID: 0}
   amplifiers: []
   healthDuration: 0
@@ -107179,7 +107178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1771034200
 Transform:
   m_ObjectHideFlags: 0
@@ -129888,7 +129887,6 @@ MonoBehaviour:
   detectTrigger: {fileID: 260197210}
   bossStartHp: 100
   bossTurningDuration: 5
-  specialActionTrigger: {fileID: 0}
   weaknessCore: {fileID: 2246373338237896328}
   amplifiers:
   - {fileID: 2246373338237896327}
@@ -129905,18 +129903,6 @@ MonoBehaviour:
   enableSecondStage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2146565851}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_speed
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1.5
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2146565852}
         m_TargetAssemblyTypeName: Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_.PunchBossAdapter,
           Assembly-CSharp
@@ -129926,7 +129912,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 3.5
+          m_FloatArgument: 4
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

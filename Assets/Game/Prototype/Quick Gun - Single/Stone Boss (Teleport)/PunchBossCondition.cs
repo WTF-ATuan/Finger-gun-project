@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 	public class PunchBossCondition : StateMachineBehaviour{
-		[SerializeField] private float specialAttackDuration = 7.5f;
+		[SerializeField] private float specialAttackDuration = 20f;
 
 
 		private Transform _player;

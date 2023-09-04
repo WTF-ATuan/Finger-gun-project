@@ -8,16 +8,13 @@ namespace Game.Prototype.Pistol{
 		[SerializeField] private float maxDistance = 5;
 		[SerializeField] private float maxLineDistance = 2;
 		[SerializeField] private float smoothValue = 20;
-		[SerializeField] private bool isRight = true;
 		private LineRenderer _lineRenderer;
 		private GameObject _aimTarget;
-		private MeshRenderer _targetMesh;
 
 
 		private void Start(){
 			_aimTarget = Instantiate(aimTargetPrefab, transform.position, Quaternion.identity);
 			_lineRenderer = GetComponent<LineRenderer>();
-			_targetMesh = _aimTarget.GetComponent<MeshRenderer>();
 			_lineRenderer.positionCount = 2;
 		}
 
