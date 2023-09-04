@@ -102065,7 +102065,6 @@ MonoBehaviour:
   maxDistance: 7
   maxLineDistance: 1
   smoothValue: 20
-  isRight: 0
 --- !u!120 &1761355169
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -124718,7 +124717,6 @@ MonoBehaviour:
   maxDistance: 7
   maxLineDistance: 1
   smoothValue: 20
-  isRight: 1
 --- !u!120 &2095880645
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -129912,7 +129910,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 4
+          m_FloatArgument: 3.5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

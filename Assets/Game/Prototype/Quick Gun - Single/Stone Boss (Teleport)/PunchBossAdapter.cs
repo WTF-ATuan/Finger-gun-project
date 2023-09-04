@@ -86,12 +86,14 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 					_animator.SetTrigger($"Next");
 					enableSecondStage?.Invoke();
 					hpBar.color = Color.yellow;
+					amplifiers.ForEach(x => x.gameObject.SetActive(true));
 					break;
 				case 3:
 					_animator.SetTrigger($"Dead");
 					enableBossDead?.Invoke();
 					return;
 			}
+
 			bossHp = bossStartHp;
 			UpdateHpBar();
 		}

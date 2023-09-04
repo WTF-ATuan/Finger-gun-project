@@ -56,6 +56,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){
 			animator.SetBool(Hard, false);
 			animator.SetBool(Light, false);
+			_animator.transform.DOKill();
 		}
 
 		private void TurnToPlayer(){
