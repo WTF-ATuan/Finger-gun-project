@@ -1,9 +1,13 @@
 ﻿using System;
 using DG.Tweening;
+using Game.Project;
 using UnityEngine;
 
 namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 	public class PunchBossCondition : StateMachineBehaviour{
+		[SerializeField] private float specialAttackDuration = 7.5f;
+
+
 		private Transform _player;
 		private Collider _detectTrigger;
 		private Animator _animator;
@@ -13,7 +17,14 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		private int _hitCount;
 		private static readonly int Hard = Animator.StringToHash("Hard");
 		private static readonly int Light = Animator.StringToHash("Light");
-		
+		private static readonly int Special = Animator.StringToHash("Special");
+
+		private ColdDownTimer _specialAttackTimer;
+
+		private void Awake(){
+			_specialAttackTimer = new ColdDownTimer(specialAttackDuration);
+		}
+
 		public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo,
 			int layerIndex){
 			_animator = animator;
@@ -27,12 +38,19 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 
 		public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo,
 			int layerIndex){
-			if(_adapter.hitCount > 2){
-				animator.SetBool(Hard, PlayerInRange());
+			if(_adapter.bossCurrentStage == 1){
+				FirstStage(animator);
 			}
 			else{
-				animator.SetBool(Light, PlayerInRange());
+				animator.SetBool(_adapter.hitCount > 1 ? Hard : Light, PlayerInRange());
+				if(!_specialAttackTimer.CanInvoke()) return;
+				_animator.SetTrigger(Special);
+				_specialAttackTimer.Reset();
 			}
+		}
+
+		private void FirstStage(Animator animator){
+			animator.SetBool(_adapter.hitCount > 2 ? Hard : Light, PlayerInRange());
 		}
 
 		public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex){

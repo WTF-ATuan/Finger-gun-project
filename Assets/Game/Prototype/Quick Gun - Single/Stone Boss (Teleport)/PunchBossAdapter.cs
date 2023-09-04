@@ -14,7 +14,6 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[Required] [BoxGroup("Basic")] public Collider detectTrigger;
 		[Required] [BoxGroup("Basic")] public float bossStartHp = 100;
 		[Required] [BoxGroup("Basic")] public float bossTurningDuration = 5;
-		[Required] [BoxGroup("Basic")] public Collider specialActionTrigger;
 
 		[BoxGroup("Weakness")] public Collider weaknessCore;
 		[BoxGroup("Weakness")] public List<Collider> amplifiers;
@@ -133,11 +132,6 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			if(_preAttackInRange && !detectTrigger.bounds.Contains(player.position)){
 				EventAggregator.Publish(new DodgeAction());
 			}
-		}
-
-		public void SpecialActionCondition(){
-			var playerInRange = specialActionTrigger.bounds.Contains(player.position);
-			
 		}
 
 		#endregion
