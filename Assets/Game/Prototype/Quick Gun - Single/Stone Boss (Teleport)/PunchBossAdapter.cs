@@ -30,6 +30,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[FoldoutGroup("Event")] public UnityEvent enableBossDead;
 
 		private ColdDownTimer _timer;
+		private Animator _animator;
 
 		private void Start(){
 			weaknessCore.OnCollisionEnterAsObservable().Subscribe(OnWeaknessCoreHit);
@@ -38,6 +39,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			bossCurrentStage = 1;
 			bossHp = bossStartHp;
 			_timer = new ColdDownTimer(healthDuration);
+			_animator = GetComponent<Animator>();
 		}
 
 		[Button]
@@ -81,10 +83,13 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			bossCurrentStage += 1;
 			switch(bossCurrentStage){
 				case 2:
+					_animator.SetTrigger($"Next");
 					enableSecondStage?.Invoke();
 					hpBar.color = Color.yellow;
+					amplifiers.ForEach(x => x.gameObject.SetActive(true));
 					break;
 				case 3:
+					_animator.SetTrigger($"Dead");
 					enableBossDead?.Invoke();
 					return;
 			}

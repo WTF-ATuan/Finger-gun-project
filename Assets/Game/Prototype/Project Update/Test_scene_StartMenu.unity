@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45160268c3f4ebdaf5d12a448f3f3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  releaseTag: 0.6.0
+  releaseTag: 0.7.0
   onNewVersion:
     m_PersistentCalls:
       m_Calls:
@@ -2203,7 +2203,6 @@ MonoBehaviour:
   maxDistance: 7
   maxLineDistance: 1
   smoothValue: 20
-  isRight: 0
 --- !u!120 &618235243
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -2739,7 +2738,6 @@ MonoBehaviour:
   maxDistance: 7
   maxLineDistance: 1
   smoothValue: 20
-  isRight: 1
 --- !u!120 &818493711
 LineRenderer:
   m_ObjectHideFlags: 0
