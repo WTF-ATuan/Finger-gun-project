@@ -54,7 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0
+    - _Alpha: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _CastShadows: 0
@@ -62,7 +62,7 @@ Material:
     - _DstBlend: 10
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: -7
+    - _Speed: -3.5
     - _SrcBlend: 5
     - _Surface: 1
     - _ZTest: 4
