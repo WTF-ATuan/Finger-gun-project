@@ -70,7 +70,7 @@ Material:
     - _ZWriteControl: 0
     - _switch: -0.188
     m_Colors:
-    - _AlphaTex_Tiling: {r: 1, g: 3.38, b: 0, a: 0}
+    - _AlphaTex_Tiling: {r: 1, g: 3.33, b: 0, a: 0}
     - _MainColor: {r: 0.9622642, g: 0.5703388, b: 0.26779994, a: 0}
     - _MainTex_Tiling: {r: 1, g: 1.5, b: 0, a: 0}
   m_BuildTextureStacks: []
