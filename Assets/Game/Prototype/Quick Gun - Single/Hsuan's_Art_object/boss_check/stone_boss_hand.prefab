@@ -1091,6 +1091,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 312be0867c98dbc4cb75b6bafba3354c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 312be0867c98dbc4cb75b6bafba3354c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3e6f11c23a1b8724d891343cf0e45dc2, type: 2}
@@ -1177,9 +1181,17 @@ PrefabInstance:
       value: fbx_blat_wave
       objectReference: {fileID: 0}
     - target: {fileID: 4808079273414556506, guid: 7ce8bac5b693f4e43af4e0cb86adc9b9, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4808079273414556506, guid: 7ce8bac5b693f4e43af4e0cb86adc9b9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f683698c2143519408865c9d1d0efc59, type: 2}
+    - target: {fileID: 8390056177349970034, guid: 7ce8bac5b693f4e43af4e0cb86adc9b9, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8390056177349970034, guid: 7ce8bac5b693f4e43af4e0cb86adc9b9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
