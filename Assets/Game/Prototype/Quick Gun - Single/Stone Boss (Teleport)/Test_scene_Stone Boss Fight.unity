@@ -106890,6 +106890,8 @@ MonoBehaviour:
   amplifiers: []
   healthDuration: 0
   weaknessHitVFX: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c, type: 3}
+  amplifierHitSound: {fileID: 0}
+  coreHitSound: {fileID: 0}
   hpBar: {fileID: 1832197606}
   hitCount: 0
   bossHp: 60
@@ -132255,6 +132257,8 @@ MonoBehaviour:
   - {fileID: 490722899}
   healthDuration: 1.5
   weaknessHitVFX: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c, type: 3}
+  amplifierHitSound: {fileID: 8300000, guid: fac766d719e16e847b956d1433580c9d, type: 3}
+  coreHitSound: {fileID: 8300000, guid: 75f8e14a4e177484a92f318e46c9fa34, type: 3}
   hpBar: {fileID: 146491073}
   hitCount: 0
   bossHp: 0

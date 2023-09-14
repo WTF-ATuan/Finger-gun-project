@@ -19,6 +19,8 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[BoxGroup("Weakness")] public List<Collider> amplifiers;
 		[BoxGroup("Weakness")] public float healthDuration = 2;
 		[BoxGroup("Weakness")] public GameObject weaknessHitVFX;
+		[BoxGroup("Weakness")] public AudioClip amplifierHitSound;
+		[BoxGroup("Weakness")] public AudioClip coreHitSound;
 
 		[BoxGroup("Health")] public Image hpBar;
 
@@ -31,6 +33,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 
 		private ColdDownTimer _timer;
 		private Animator _animator;
+		private AudioSource _audioSource;
 
 		private void Start(){
 			weaknessCore.OnCollisionEnterAsObservable().Subscribe(OnWeaknessCoreHit);
@@ -40,6 +43,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			bossHp = bossStartHp;
 			_timer = new ColdDownTimer(healthDuration);
 			_animator = GetComponent<Animator>();
+			_audioSource = gameObject.AddComponent<AudioSource>();
 		}
 
 		[Button]
@@ -56,6 +60,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			var vfxClone = Instantiate(weaknessHitVFX, obj.GetContact(0).point,
 				Quaternion.Euler(obj.GetContact(0).normal));
 			Destroy(vfxClone, 0.35f);
+			_audioSource.PlayOneShot(coreHitSound);
 			DamageBoss();
 		}
 
@@ -67,6 +72,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			var vfxClone = Instantiate(weaknessHitVFX, obj.GetContact(0).point,
 				Quaternion.Euler(obj.GetContact(0).normal));
 			Destroy(vfxClone, 0.35f);
+			_audioSource.PlayOneShot(amplifierHitSound);
 			amplifier.gameObject.SetActive(false);
 		}
 
