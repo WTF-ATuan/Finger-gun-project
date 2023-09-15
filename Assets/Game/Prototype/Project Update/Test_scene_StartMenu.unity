@@ -11479,13 +11479,7 @@ MonoBehaviour:
   teleportTriggers:
   - {fileID: 1828528780}
   - {fileID: 1103928173}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 1311542742}
-  - {fileID: 0}
   - {fileID: 1053652191}
   - {fileID: 1134996532}
   playerTransform: {fileID: 9111273701779259039}
