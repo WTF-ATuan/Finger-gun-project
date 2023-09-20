@@ -43,7 +43,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.36
+    - _Alpha: 0.23
     - _AlphaClip: 1
     - _Blend: 0
     - _CastShadows: 0
@@ -51,8 +51,8 @@ Material:
     - _DepthOffset: -0.57
     - _DstBlend: 10
     - _Fullscreen: 2.02
-    - _NoiseScale: 1.93
-    - _NoiseSpeed: 0.095
+    - _NoiseScale: 4.3
+    - _NoiseSpeed: 0.35
     - _NoiseStrength: 0.55
     - _QueueControl: 0
     - _QueueOffset: 2
