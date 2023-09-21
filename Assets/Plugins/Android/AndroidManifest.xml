@@ -19,7 +19,4 @@
     <uses-feature android:name="oculus.software.handtracking" android:required="false"/>
     <uses-permission android:name="com.oculus.permission.HAND_TRACKING"/>
     <uses-permission android:name="com.oculus.permission.USE_ANCHOR_API"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 </manifest>

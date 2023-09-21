@@ -22,22 +22,22 @@ namespace Game.Prototype.Project_Update{
 			}
 		}
 
-		public static IEnumerator DownloadAPK(string apkURL, string apkName, Action<string> result){
-			var request = UnityWebRequest.Get(apkURL);
-			request.downloadHandler = new DownloadHandlerBuffer();
-
-			yield return request.SendWebRequest();
-
-			if(request.result != UnityWebRequest.Result.Success){
-				Debug.LogError("Error downloading APK: " + request.error);
-			}
-			else{
-				var apkData = request.downloadHandler.data;
-				// Save the downloaded APK to a file
-				var savePath = "/sdcard/Download/" + $"/{apkName}.apk";
-				File.WriteAllBytes(savePath, apkData);
-				result?.Invoke(savePath);
-			}
-		}
+		// public static IEnumerator DownloadAPK(string apkURL, string apkName, Action<string> result){
+		// 	var request = UnityWebRequest.Get(apkURL);
+		// 	request.downloadHandler = new DownloadHandlerBuffer();
+		//
+		// 	yield return request.SendWebRequest();
+		//
+		// 	if(request.result != UnityWebRequest.Result.Success){
+		// 		Debug.LogError("Error downloading APK: " + request.error);
+		// 	}
+		// 	else{
+		// 		var apkData = request.downloadHandler.data;
+		// 		// Save the downloaded APK to a file
+		// 		var savePath = "/sdcard/Download/" + $"/{apkName}.apk";
+		// 		File.WriteAllBytes(savePath, apkData);
+		// 		result?.Invoke(savePath);
+		// 	}
+		// }
 	}
 }
