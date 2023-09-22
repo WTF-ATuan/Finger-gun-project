@@ -209,6 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 24489611}
   - component: {fileID: 24489612}
+  - component: {fileID: 24489613}
   m_Layer: 0
   m_Name: Project Dependcy
   m_TagString: Untagged
@@ -244,6 +245,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugText: {fileID: 761495316}
+--- !u!114 &24489613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24489609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b3f7e0ca25c4a2ebbce340a2a2c81c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxDataList:
+  - sfxName: Core Hit Sound
+    sfxClip: {fileID: 8300000, guid: 75f8e14a4e177484a92f318e46c9fa34, type: 3}
+  - sfxName: Amplifier Hit Sound
+    sfxClip: {fileID: 8300000, guid: fac766d719e16e847b956d1433580c9d, type: 3}
+  - sfxName: Hit Player Sound
+    sfxClip: {fileID: 8300000, guid: 4be70896a64162941808b99fb61c0ac3, type: 3}
+  - sfxName: Dodge Sound
+    sfxClip: {fileID: 8300000, guid: bba0aef292edc924d8c6659843636ab1, type: 3}
+  - sfxName: Pistol Fire Sound
+    sfxClip: {fileID: 8300000, guid: 0addcc409a57b4a43b86a3d2310ac5b4, type: 3}
+  - sfxName: Pistol Empty Sound
+    sfxClip: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
+  - sfxName: Pistol Reload Sound
+    sfxClip: {fileID: 8300000, guid: 9589218ea096de346976f29d0efd854f, type: 3}
 --- !u!1 &49865750
 GameObject:
   m_ObjectHideFlags: 0
@@ -10315,9 +10343,6 @@ MonoBehaviour:
   - {fileID: 2065620763}
   isRight: 0
   reloadAngleRange: {x: 40, y: 70}
-  fireClip: {fileID: 8300000, guid: 0addcc409a57b4a43b86a3d2310ac5b4, type: 3}
-  emptyClip: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
-  reloadClip: {fileID: 8300000, guid: 9589218ea096de346976f29d0efd854f, type: 3}
   fireVFX: {fileID: 4834526503407549940, guid: 2735bebe54c1f5a4096f5134a96f7e77, type: 3}
   ammoCountText: {fileID: 1508495450}
   reloadingRotateDirection: {x: 0, y: 0, z: 1}
@@ -10619,9 +10644,6 @@ MonoBehaviour:
   - {fileID: 1642931001}
   isRight: 1
   reloadAngleRange: {x: 40, y: 70}
-  fireClip: {fileID: 8300000, guid: 0addcc409a57b4a43b86a3d2310ac5b4, type: 3}
-  emptyClip: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
-  reloadClip: {fileID: 8300000, guid: 9589218ea096de346976f29d0efd854f, type: 3}
   fireVFX: {fileID: 4834526503407549940, guid: 2735bebe54c1f5a4096f5134a96f7e77, type: 3}
   ammoCountText: {fileID: 1890103536}
   reloadingRotateDirection: {x: 0, y: 0, z: 1}

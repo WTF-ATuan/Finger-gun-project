@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Game.Prototype.SoundEffect;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -24,24 +25,23 @@ namespace Game.Prototype.Pistol{
 		private Vector2 reloadAngleRange = new(40, 70);
 
 
-		[TitleGroup("View")] [SerializeField] private AudioClip fireClip;
-		[TitleGroup("View")] [SerializeField] private AudioClip emptyClip;
-		[TitleGroup("View")] [SerializeField] private AudioClip reloadClip;
+		private const string FireSoundCommand = "Pistol Fire Sound";
+		private const string EmptySoundCommand = "Pistol Empty Sound";
+		private const string ReloadSoundCommand = "Pistol Reload Sound";
 		[TitleGroup("View")] [SerializeField] private GameObject fireVFX;
 		[TitleGroup("View")] [SerializeField] private TMP_Text ammoCountText;
 		[TitleGroup("View")] [SerializeField] private Vector3 reloadingRotateDirection = Vector3.forward;
 
 
 		private PistolRecoil _recoil;
-		private AudioSource _audioPlayer;
 		private int _currentAmmo;
 
 
 		private void Start(){
 			_recoil = GetComponent<PistolRecoil>();
-			_audioPlayer = gameObject.AddComponent<AudioSource>();
 			ModifyCurrentAmmo(ammoMax);
 		}
+
 		private void Update(){
 			var openingFire =
 					OVRInput.GetDown(isRight
@@ -59,9 +59,10 @@ namespace Game.Prototype.Pistol{
 
 		private void Fire(){
 			if(_currentAmmo < 1){
-				_audioPlayer.PlayOneShot(emptyClip);
+				EventAggregator.Publish(new SFXEvent(EmptySoundCommand, transform.position));
 				return;
 			}
+
 			// 換彈中不能射擊
 			if(!_recoil.enabled) return;
 			ModifyCurrentAmmo(_currentAmmo - 1);
@@ -73,7 +74,7 @@ namespace Game.Prototype.Pistol{
 			var vfxClone = Instantiate(fireVFX, muzzles[0].position, muzzles[0].rotation);
 			Destroy(vfxClone, 1.5f);
 			_recoil.Recoil();
-			_audioPlayer.PlayOneShot(fireClip);
+			EventAggregator.Publish(new SFXEvent(FireSoundCommand, transform.position));
 			SimpleHaptic();
 		}
 
@@ -86,7 +87,7 @@ namespace Game.Prototype.Pistol{
 			ModifyCurrentAmmo(ammoMax);
 			transform.DORotate(targetAngle, calculateReloadingTime, RotateMode.FastBeyond360)
 					.OnComplete(() => { _recoil.enabled = true; });
-			_audioPlayer.PlayOneShot(reloadClip);
+			EventAggregator.Publish(new SFXEvent(ReloadSoundCommand, transform.position));
 		}
 
 		private float CalculateReloadingTime(){

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Game.Project;
+using Game.Prototype.SoundEffect;
 using Sirenix.OdinInspector;
 using UniRx;
 using UniRx.Triggers;
@@ -19,8 +20,8 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 		[BoxGroup("Weakness")] public List<Collider> amplifiers;
 		[BoxGroup("Weakness")] public float healthDuration = 2;
 		[BoxGroup("Weakness")] public GameObject weaknessHitVFX;
-		[BoxGroup("Weakness")] public AudioClip amplifierHitSound;
-		[BoxGroup("Weakness")] public AudioClip coreHitSound;
+		private const string AmplifierHitSoundCommand = "Amplifier Hit Sound";
+		private const string CoreHitSoundCommand = "Core Hit Sound";
 
 		[BoxGroup("Health")] public Image hpBar;
 
@@ -33,7 +34,6 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 
 		private ColdDownTimer _timer;
 		private Animator _animator;
-		private AudioSource _audioSource;
 
 		private void Start(){
 			weaknessCore.OnCollisionEnterAsObservable().Subscribe(OnWeaknessCoreHit);
@@ -43,7 +43,6 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			bossHp = bossStartHp;
 			_timer = new ColdDownTimer(healthDuration);
 			_animator = GetComponent<Animator>();
-			_audioSource = gameObject.AddComponent<AudioSource>();
 		}
 
 		[Button]
@@ -60,7 +59,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			var vfxClone = Instantiate(weaknessHitVFX, obj.GetContact(0).point,
 				Quaternion.Euler(obj.GetContact(0).normal));
 			Destroy(vfxClone, 0.35f);
-			_audioSource.PlayOneShot(coreHitSound);
+			EventAggregator.Publish(new SFXEvent(CoreHitSoundCommand, obj.GetContact(0).point));
 			DamageBoss();
 		}
 
@@ -72,7 +71,7 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 			var vfxClone = Instantiate(weaknessHitVFX, obj.GetContact(0).point,
 				Quaternion.Euler(obj.GetContact(0).normal));
 			Destroy(vfxClone, 0.35f);
-			_audioSource.PlayOneShot(amplifierHitSound);
+			EventAggregator.Publish(new SFXEvent(AmplifierHitSoundCommand, obj.GetContact(0).point));
 			amplifier.gameObject.SetActive(false);
 		}
 
