@@ -1,4 +1,5 @@
 ﻿using Firebase;
+using Firebase.Analytics;
 using UnityEngine;
 
 namespace Game.Prototype.Project_Update{
@@ -7,30 +8,31 @@ namespace Game.Prototype.Project_Update{
 
 		private void Start(){
 			FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
-				var dependencyStatus = task.Result;
-				if(dependencyStatus == DependencyStatus.Available){
+				var status = task.Result;
+				if(status == DependencyStatus.Available){
 					_app = FirebaseApp.DefaultInstance;
+					FirebaseAnalytics.LogEvent(FirebaseAnalytics.EventTutorialBegin);
 				}
 				else{
-					Debug.LogError($"Could not resolve all Firebase dependencies: {dependencyStatus}");
+					Debug.LogError($"Could not resolve all Firebase dependencies: {status}");
 				}
 			});
 		}
 
 		public void PlayerDeadEvent(){
-			Firebase.Analytics.FirebaseAnalytics.LogEvent("player_dead");
+			FirebaseAnalytics.LogEvent("player_dead");
 		}
 
 		public void PassStageEvent(int stageCount = 1){
-			Firebase.Analytics.FirebaseAnalytics.LogEvent("pass_stage", "stage", $"{stageCount}");
+			FirebaseAnalytics.LogEvent("pass_stage", "stage", $"{stageCount}");
 		}
 
 		public void BeatBossEvent(){
-			Firebase.Analytics.FirebaseAnalytics.LogEvent("beat_boss");
+			FirebaseAnalytics.LogEvent("beat_boss");
 		}
 
 		public void ReplayEvent(){
-			Firebase.Analytics.FirebaseAnalytics.LogEvent("replay_game");
+			FirebaseAnalytics.LogEvent("replay_game");
 		}
 	}
 }
