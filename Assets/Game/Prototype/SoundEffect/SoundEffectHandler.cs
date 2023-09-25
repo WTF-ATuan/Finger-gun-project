@@ -13,6 +13,7 @@ namespace Game.Prototype.SoundEffect{
 		private void Start(){
 			_sfxSource = GetComponent<AudioSource>();
 			EventAggregator.OnEvent<SFXEvent>().Subscribe(PlaySFXByEvent);
+			DontDestroyOnLoad(gameObject);
 		}
 
 		private void PlaySFXByEvent(SFXEvent obj){

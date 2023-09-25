@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using Sirenix.OdinInspector;
+using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,6 +18,10 @@ namespace Game.Prototype.Quick_Gun___Single.Stone_Boss__Teleport_{
 				return;
 			}
 
+			onHit?.Invoke();
+		}
+		[Button]
+		private void Trigger(){
 			onHit?.Invoke();
 		}
 
