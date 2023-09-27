@@ -50,8 +50,10 @@ Material:
     - _CellPower: 2.47
     - _Cull: 2
     - _DstBlend: 10
+    - _EdgeInside: 0.3
     - _Float: 0
     - _Fullscreenintensity: 0.304
+    - _MainControl: 1
     - _NoiseScale: 96
     - _NoiseSpeed: 0.4
     - _NoiseStrength: 0.0502
@@ -65,8 +67,9 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     - _true_hurt_and_false_defense: 0
-    - _vignettelntensity: 0.894
+    - _vignettelntensity: 0.875
     m_Colors:
+    - _Color: {r: 0.8490566, g: 0.35644358, b: 0.35644358, a: 0}
     - _FullscreenColor: {r: 0.8301887, g: 0.36860928, b: 0.3250267, a: 0}
     - _RippleCenter: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
