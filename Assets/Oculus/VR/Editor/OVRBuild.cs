@@ -236,9 +236,14 @@ partial class OculusBuildApp : EditorWindow
             if (EditorGUI.EndChangeCheck())
                 OVRGradleGeneration.ToggleUtilities();
             EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space(5f);
+            EditorGUILayout.BeginHorizontal();
+            PlayerSettings.bundleVersion = EditorGUILayout.TextField(new GUIContent("Product Version"),
+                PlayerSettings.bundleVersion, GUILayout.Width(220));
 
+            EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space(15f);
-
+            
             EditorGUILayout.BeginHorizontal();
             using (new EditorGUI.DisabledScope(string.IsNullOrEmpty(currConnectedDevice)))
             {
