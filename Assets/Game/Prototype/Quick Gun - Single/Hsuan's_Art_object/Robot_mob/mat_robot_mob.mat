@@ -37,6 +37,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: eb72911aebb6d0347884bb935ab6c946, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmissionTex_2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: abbee917346e75d4bb378dcff01eff37, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -57,7 +61,7 @@ Material:
     m_Floats:
     - _LightSpceCutoffSmoothness: 1
     - _LightSpecCutoff: 0.729
-    - _MainTex_View: 1
+    - _MainTex_View: 53.48
     - _Outer_Rim_Smoothness: 1.19
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -66,6 +70,7 @@ Material:
     - _View_LightSpecCutoff: 0.964
     m_Colors:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor_2: {r: 0, g: 0, b: 0, a: 0}
     - _Inner_Glow_Color: {r: 1, g: 0.7311321, b: 0.7311321, a: 0}
     - _Outer_Rim_Color: {r: 1, g: 0, b: 0, a: 0}
     - _Specular_Color: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0}

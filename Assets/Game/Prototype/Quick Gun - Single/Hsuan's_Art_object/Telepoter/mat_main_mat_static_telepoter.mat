@@ -69,7 +69,7 @@ Material:
     m_Floats:
     - _EmissTex01View: 8
     - _EmissTex02View: 0
-    - _MainView: 1
+    - _MainView: 2
     - _MetallicView: 0
     - _NormalView: 1
     - _QueueControl: 0
