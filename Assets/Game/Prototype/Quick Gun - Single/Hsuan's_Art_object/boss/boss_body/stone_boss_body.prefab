@@ -40,6 +40,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1776109144834319227}
     m_Modifications:
+    - target: {fileID: 395263228357863984, guid: 06524206dcd20494089d72742a53b4b6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1214387939745551695, guid: 06524206dcd20494089d72742a53b4b6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581504115945919898, guid: 06524206dcd20494089d72742a53b4b6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3843723930755204398, guid: 06524206dcd20494089d72742a53b4b6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5885527356695185186, guid: 06524206dcd20494089d72742a53b4b6, type: 3}
       propertyPath: m_Name
       value: fbx_blat_wave_body
@@ -87,6 +103,18 @@ PrefabInstance:
     - target: {fileID: 6550001177798991256, guid: 06524206dcd20494089d72742a53b4b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015650436871956564, guid: 06524206dcd20494089d72742a53b4b6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336016102233899530, guid: 06524206dcd20494089d72742a53b4b6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185297361852164780, guid: 06524206dcd20494089d72742a53b4b6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06524206dcd20494089d72742a53b4b6, type: 3}
