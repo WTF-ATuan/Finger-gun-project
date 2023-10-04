@@ -59,7 +59,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _EmissTex01View: 0.5
+    - _EmissTex01View: 0.7
     - _EmissTex02View: 10
     - _MainView: 0
     - _QueueControl: 0
