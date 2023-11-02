@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Game.Project;
 using Game.Prototype.SoundEffect;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -24,6 +25,9 @@ namespace Game.Prototype.Pistol{
 		[TitleGroup("Setting")] [SerializeField]
 		private Vector2 reloadAngleRange = new(40, 70);
 
+		[TitleGroup("Setting")] [SerializeField]
+		private float rapidFireDuration = 0.2f;
+
 
 		private const string FireSoundCommand = "Pistol Fire Sound";
 		private const string EmptySoundCommand = "Pistol Empty Sound";
@@ -35,11 +39,13 @@ namespace Game.Prototype.Pistol{
 
 		private PistolRecoil _recoil;
 		private int _currentAmmo;
+		private ColdDownTimer _rapidFireTimer;
 
 
 		private void Start(){
 			_recoil = GetComponent<PistolRecoil>();
 			ModifyCurrentAmmo(ammoMax);
+			_rapidFireTimer = new ColdDownTimer(rapidFireDuration);
 		}
 
 		private void Update(){
@@ -47,8 +53,9 @@ namespace Game.Prototype.Pistol{
 					OVRInput.GetDown(isRight
 							? OVRInput.Button.SecondaryIndexTrigger
 							: OVRInput.Button.PrimaryIndexTrigger);
-			if(openingFire){
+			if(openingFire && _rapidFireTimer.CanInvoke()){
 				Fire();
+				_rapidFireTimer.Reset();
 			}
 
 			if(transform.eulerAngles.z > reloadAngleRange.x && transform.eulerAngles.z < reloadAngleRange.y &&
@@ -103,7 +110,7 @@ namespace Game.Prototype.Pistol{
 		private void SimpleHaptic(){
 			OVRInput.SetControllerVibration(500, 0.9f,
 				isRight ? OVRInput.Controller.RTouch : OVRInput.Controller.LTouch);
-			Invoke(nameof(StopHaptic), 0.2f);
+			Invoke(nameof(StopHaptic), rapidFireDuration);
 		}
 
 		private void StopHaptic(){
